@@ -9,4 +9,9 @@ public class WebserviceConstants {
 
     public final static String kPARSE_PROPERTY_USER_NAME = "name";
     public final static String kPARSE_PROPERTY_USER_ADMIN = "admin";
+
+    public final static String kPARSE_OBJECT_SETTINGS = "Settings";
+    public final static String kPARSE_PROPERY_SETTINGS_KEY = "key";
+    public final static String kPARSE_PROPERY_SETTINGS_VALUE = "value";
+    public final static String kPARSE_KEY_SETTINGS_QUESTION_COUNT = "questionCount";
 }

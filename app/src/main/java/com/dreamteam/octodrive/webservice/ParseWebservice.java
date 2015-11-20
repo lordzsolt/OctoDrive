@@ -9,6 +9,7 @@ import com.dreamteam.octodrive.model.User;
 import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 /**
@@ -23,6 +24,8 @@ public class ParseWebservice  {
         Parse.initialize(context, applicationId, clientKey);
     }
 
+
+    //User Methods
     public @Nullable User login(String username, String password) {
         try {
             ParseUser parseUser = ParseUser.logIn(username, password);
@@ -51,4 +54,33 @@ public class ParseWebservice  {
             return null;
         }
     }
+
+
+    //Settings Methods
+    public int getQuestionCount() {
+        int result = 0;
+
+        ParseQuery<ParseObject> query = ParseQuery.getQuery(
+                WebserviceConstants.kPARSE_OBJECT_SETTINGS);
+        query.whereEqualTo(WebserviceConstants.kPARSE_PROPERY_SETTINGS_KEY,
+                           WebserviceConstants.kPARSE_KEY_SETTINGS_QUESTION_COUNT);
+        ParseObject settingsObject = null;
+        try {
+            settingsObject = query.getFirst();
+        }
+        catch (ParseException e) {
+            Log.e(LogTag, "Webservice.getQuestionCount threw and exception, please make sure " +
+                    WebserviceConstants.kPARSE_KEY_SETTINGS_QUESTION_COUNT + " key exists in the " +
+                    "parse database. Exception is: " + e.toString());
+        }
+
+        String valueString = settingsObject.getString(WebserviceConstants.kPARSE_PROPERY_SETTINGS_VALUE);
+        if (valueString != null) {
+            result = Integer.parseInt(valueString);
+        }
+
+        return result;
+    }
+
+
 }
