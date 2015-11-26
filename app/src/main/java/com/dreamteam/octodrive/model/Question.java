@@ -5,17 +5,13 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
-import org.json.JSONArray;
-
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Lord Zsolt on 11/20/2015.
  */
-public class Question {
-
-    private ParseObject _parseObject;
+public class Question extends OctoObject {
 
     public static Question getQuestion(String language) throws ParseException {
         return getQuestions(1, language).get(0);
@@ -47,10 +43,6 @@ public class Question {
 
     public void save() throws ParseException {
         _parseObject.save();
-    }
-
-    public ParseObject parseObject() {
-        return _parseObject;
     }
 
     public String message() {

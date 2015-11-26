@@ -11,9 +11,7 @@ import java.util.List;
 /**
  * Created by Lord Zsolt on 11/26/2015.
  */
-public class Result {
-
-    private ParseObject _parseObject;
+public class Result extends OctoObject {
 
     public static List<Result> resultsForUser(User user) {
         ParseQuery<ParseObject> query = new ParseQuery<>(WebserviceConstants.kPARSE_OBJECT_RESULT);
