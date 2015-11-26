@@ -1,5 +1,7 @@
 package com.dreamteam.octodrive.webservice;
 
+import java.util.SimpleTimeZone;
+
 /**
  * Created by Lordzsolt on 11/19/2015.
  */
@@ -14,4 +16,12 @@ public class WebserviceConstants {
     public final static String kPARSE_PROPERY_SETTINGS_KEY = "key";
     public final static String kPARSE_PROPERY_SETTINGS_VALUE = "value";
     public final static String kPARSE_KEY_SETTINGS_QUESTION_COUNT = "questionCount";
+
+    public final static String kPARSE_OBJECT_QUESTION = "Question";
+    public final static String kPARSE_PROPERTY_QUESTION_MESSAGE = "message";
+    public final static String kPARSE_PROPERTY_QUESTION_ANSWERS = "answers";
+    public final static String kPARSE_PROPERTY_QUESTION_CORRECT = "correct";
+    public final static String kPARSE_PROPERTY_QUESTION_IMAGE = "image";
+    public final static String kPARSE_PROPERTY_QUESTION_ACTIVE = "active";
+    public final static String kPARSE_PROPERTY_QUESTION_LANGUAGE = "language";
 }
