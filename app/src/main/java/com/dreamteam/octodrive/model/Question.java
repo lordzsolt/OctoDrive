@@ -17,14 +17,6 @@ public class Question {
 
     private ParseObject _parseObject;
 
-    public Question() {
-        _parseObject = new ParseObject(WebserviceConstants.kPARSE_OBJECT_QUESTION);
-    }
-
-    public Question(ParseObject question) {
-        _parseObject = question;
-    }
-
     public static Question getQuestion(String language) throws ParseException {
         return getQuestions(1, language).get(0);
     }
@@ -45,8 +37,20 @@ public class Question {
         return array;
     }
 
+    public Question() {
+        _parseObject = new ParseObject(WebserviceConstants.kPARSE_OBJECT_QUESTION);
+    }
+
+    public Question(ParseObject question) {
+        _parseObject = question;
+    }
+
     public void save() throws ParseException {
         _parseObject.save();
+    }
+
+    public ParseObject parseObject() {
+        return _parseObject;
     }
 
     public String message() {

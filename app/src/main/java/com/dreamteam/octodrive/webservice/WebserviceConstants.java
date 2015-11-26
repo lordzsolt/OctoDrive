@@ -13,8 +13,8 @@ public class WebserviceConstants {
     public final static String kPARSE_PROPERTY_USER_ADMIN = "admin";
 
     public final static String kPARSE_OBJECT_SETTINGS = "Settings";
-    public final static String kPARSE_PROPERY_SETTINGS_KEY = "key";
-    public final static String kPARSE_PROPERY_SETTINGS_VALUE = "value";
+    public final static String kPARSE_PROPERTY_SETTINGS_KEY = "key";
+    public final static String kPARSE_PROPERTY_SETTINGS_VALUE = "value";
     public final static String kPARSE_KEY_SETTINGS_QUESTION_COUNT = "questionCount";
 
     public final static String kPARSE_OBJECT_QUESTION = "Question";
@@ -24,4 +24,9 @@ public class WebserviceConstants {
     public final static String kPARSE_PROPERTY_QUESTION_IMAGE = "image";
     public final static String kPARSE_PROPERTY_QUESTION_ACTIVE = "active";
     public final static String kPARSE_PROPERTY_QUESTION_LANGUAGE = "language";
+
+    public final static String kPARSE_OBJECT_RESULT = "Result";
+    public final static String kPARSE_PROPERY_RESULT_USER = "user";
+    public final static String kPARSE_PROPERY_RESULT_LIVE = "live";
+    public final static String kPARSE_PROPERY_RESULT_SCORE = "score";
 }

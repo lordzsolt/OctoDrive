@@ -19,7 +19,7 @@ public class Settings {
 
         ParseQuery<ParseObject> query = ParseQuery.getQuery(
                 WebserviceConstants.kPARSE_OBJECT_SETTINGS);
-        query.whereEqualTo(WebserviceConstants.kPARSE_PROPERY_SETTINGS_KEY,
+        query.whereEqualTo(WebserviceConstants.kPARSE_PROPERTY_SETTINGS_KEY,
                            WebserviceConstants.kPARSE_KEY_SETTINGS_QUESTION_COUNT);
         ParseObject settingsObject = null;
         try {
@@ -31,7 +31,7 @@ public class Settings {
                     "parse database. Exception is: " + e.toString());
         }
 
-        String valueString = settingsObject.getString(WebserviceConstants.kPARSE_PROPERY_SETTINGS_VALUE);
+        String valueString = settingsObject.getString(WebserviceConstants.kPARSE_PROPERTY_SETTINGS_VALUE);
         if (valueString != null) {
             result = Integer.parseInt(valueString);
         }

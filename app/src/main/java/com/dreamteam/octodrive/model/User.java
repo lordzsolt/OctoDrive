@@ -13,17 +13,17 @@ public class User {
 
     private ParseUser _parseUser;
 
+    public static User login(String username, String password) throws ParseException {
+        ParseUser pUser = ParseUser.logIn(username, password);
+        return new User(pUser);
+    }
+
     public User() {
         _parseUser = new ParseUser();
     }
 
     public User(ParseUser parseUser) {
         _parseUser = parseUser;
-    }
-
-    public static User login(String username, String password) throws ParseException {
-        ParseUser pUser = ParseUser.logIn(username, password);
-        return new User(pUser);
     }
 
     public void save() throws ParseException {
@@ -33,6 +33,10 @@ public class User {
         else {
             _parseUser.save();
         }
+    }
+
+    public ParseUser parseUser() {
+        return _parseUser;
     }
 
     public String name() {
