@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">OctoDrive</string>
+    <string name="prompt_password">Jelszó</string>
+    <string name="prompt_email">Email</string>
+    <string name="error_invalid_password">Jelszó túl rövid.</string>
+    <string name="error_invalid_email">Helytelen email cím.</string>
+    <string name="error_incorrect_password">Helytelen jelszó.</string>
+    <string name="error_field_required">Kötelező mező.</string>
+    <string name="action_sign_in_short">Bejelentkezés</string>
+    <string name="action_sign_in">Bejelentkezés vagy regisztrálás</string>
+    <string name="permission_rationale">Kapcsolati lista az email mező kiegészítéséhez szükséges.</string>
+</resources>
