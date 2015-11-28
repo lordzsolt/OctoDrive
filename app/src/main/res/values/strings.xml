@@ -25,4 +25,9 @@
     <string name="action_previous">Previous</string>
     <string name="action_next">Next</string>
     <string name="action_finish">Finish</string>
+
+    <!-- FinishActivity -->
+    <string name="text_failed">You failed.</string>
+    <string name="text_passed">You passed.</string>
+    <string name="text_correct_ans">Correctly answered:</string>
 </resources>

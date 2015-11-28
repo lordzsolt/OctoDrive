@@ -20,4 +20,7 @@
     <string name="action_finish">Befejezés</string>
     <string name="action_next">Következő</string>
     <string name="action_previous">Előző</string>
+    <string name="text_correct_ans">Helyesen megválaszolva:</string>
+    <string name="text_passed">Sikertelen teszt.</string>
+    <string name="text_failed">Sikeres teszt.</string>
 </resources>
