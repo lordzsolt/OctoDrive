@@ -10,4 +10,5 @@
     <string name="action_sign_in_short">Bejelentkezés</string>
     <string name="action_sign_in">Bejelentkezés vagy regisztrálás</string>
     <string name="permission_rationale">Kapcsolati lista az email mező kiegészítéséhez szükséges.</string>
+    <string name="dialog_authenticating">Bejelentkezés…</string>
 </resources>
