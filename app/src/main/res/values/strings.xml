@@ -4,12 +4,20 @@
     <!-- LoginActivity -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
+    <string name="action_sign_up_instead">New user? Sign up instead &gt;</string>
+    <string name="action_sign_in">Sign in</string>
     <string name="error_invalid_email">Invalid email address.</string>
     <string name="error_invalid_password">Password too short.</string>
     <string name="error_incorrect_password">Password is incorrect.</string>
     <string name="error_field_required">Field is required.</string>
     <string name="permission_rationale">Contacts permissions are needed for providing email completions.</string>
     <string name="dialog_authenticating">Authenticating…</string>
+
+    <!-- RegisterActivity -->
+    <string name="prompt_name">Name</string>
+    <string name="error_invalid_name">Name too short.</string>
+    <string name="error_unknown_occurred">Unknown error occurred.</string>
+    <string name="action_sign_up">Sign up</string>
+    <string name="action_sign_in_instead">Already registered? Sign in instead &gt;</string>
+    <string name="dialog_registering">Registering…</string>
 </resources>

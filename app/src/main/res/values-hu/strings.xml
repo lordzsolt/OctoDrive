@@ -7,8 +7,14 @@
     <string name="error_invalid_email">Helytelen email cím.</string>
     <string name="error_incorrect_password">Helytelen jelszó.</string>
     <string name="error_field_required">Kötelező mező.</string>
-    <string name="action_sign_in_short">Bejelentkezés</string>
-    <string name="action_sign_in">Bejelentkezés vagy regisztrálás</string>
+    <string name="action_sign_in">Bejelentkezés</string>
     <string name="permission_rationale">Kapcsolati lista az email mező kiegészítéséhez szükséges.</string>
     <string name="dialog_authenticating">Bejelentkezés…</string>
+    <string name="action_sign_up">Regisztrálás</string>
+    <string name="dialog_registering">Regisztrálás…</string>
+    <string name="error_invalid_name">Név túl rövid.</string>
+    <string name="error_unknown_occurred">Ismeretlen hiba történt.</string>
+    <string name="prompt_name">Név</string>
+    <string name="action_sign_up_instead">Új felhasználó? Regisztrálj &gt;</string>
+    <string name="action_sign_in_instead">Létező felhasználó? Jelentkezz be &gt;</string>
 </resources>

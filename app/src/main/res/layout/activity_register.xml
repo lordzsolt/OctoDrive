@@ -8,19 +8,34 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.dreamteam.octodrive.LoginActivity">
+    tools:context="com.dreamteam.octodrive.RegisterActivity">
 
     <ScrollView
-        android:id="@+id/login_form"
+        android:id="@+id/register_form"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp">
 
         <LinearLayout
-            android:id="@+id/email_login_form"
+            android:id="@+id/email_register_form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <AutoCompleteTextView
+                    android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/prompt_name"
+                    android:inputType="textPersonName"
+                    android:maxLines="1"
+                    android:singleLine="true" />
+
+            </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -46,8 +61,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/prompt_password"
-                    android:imeActionId="@+id/login"
-                    android:imeActionLabel="@string/action_sign_in"
+                    android:imeActionId="@+id/register"
+                    android:imeActionLabel="@string/action_sign_up"
                     android:imeOptions="actionUnspecified"
                     android:inputType="textPassword"
                     android:maxLines="1"
@@ -56,19 +71,19 @@
             </android.support.design.widget.TextInputLayout>
 
             <Button
-                android:id="@+id/button_sign_in"
+                android:id="@+id/button_sign_up"
                 style="?android:textAppearanceSmall"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/action_sign_in"
+                android:text="@string/action_sign_up"
                 android:textStyle="bold" />
 
-            <TextView android:id="@+id/link_sign_up"
+            <TextView android:id="@+id/link_sign_in"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/action_sign_up_instead"
+                android:text="@string/action_sign_in_instead"
                 android:gravity="center"
                 android:textSize="16dip" />
 
