@@ -17,4 +17,7 @@
     <string name="prompt_name">Név</string>
     <string name="action_sign_up_instead">Új felhasználó? Regisztrálj &gt;</string>
     <string name="action_sign_in_instead">Létező felhasználó? Jelentkezz be &gt;</string>
+    <string name="action_finish">Befejezés</string>
+    <string name="action_next">Következő</string>
+    <string name="action_previous">Előző</string>
 </resources>

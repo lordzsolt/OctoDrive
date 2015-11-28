@@ -20,4 +20,9 @@
     <string name="action_sign_up">Sign up</string>
     <string name="action_sign_in_instead">Already registered? Sign in instead &gt;</string>
     <string name="dialog_registering">Registering…</string>
+
+    <!-- QuestionActivity -->
+    <string name="action_previous">Previous</string>
+    <string name="action_next">Next</string>
+    <string name="action_finish">Finish</string>
 </resources>
