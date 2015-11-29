@@ -17,13 +17,25 @@ public class Settings {
     public static int questionCount() {
         int result = 0;
 
+        String valueString = getSettingsValueForKey(WebserviceConstants.kPARSE_KEY_SETTINGS_QUESTION_COUNT);
+        if (valueString != null) {
+            result = Integer.parseInt(valueString);
+        }
+
+        return result;
+    }
+
+    private static String getSettingsValueForKey(String key) {
+
+        String valueString = null;
+
         ParseQuery<ParseObject> query = ParseQuery.getQuery(
                 WebserviceConstants.kPARSE_OBJECT_SETTINGS);
-        query.whereEqualTo(WebserviceConstants.kPARSE_PROPERTY_SETTINGS_KEY,
-                           WebserviceConstants.kPARSE_KEY_SETTINGS_QUESTION_COUNT);
-        ParseObject settingsObject = null;
+        query.whereEqualTo(WebserviceConstants.kPARSE_PROPERTY_SETTINGS_KEY, key);
+        ParseObject settingsObject;
         try {
             settingsObject = query.getFirst();
+            valueString =  settingsObject.getString(WebserviceConstants.kPARSE_PROPERTY_SETTINGS_VALUE);
         }
         catch (ParseException e) {
             Log.e(LogTag, "Settings.questionCount threw and exception, please make sure " +
@@ -31,12 +43,7 @@ public class Settings {
                     "parse database. Exception is: " + e.toString());
         }
 
-        String valueString = settingsObject.getString(WebserviceConstants.kPARSE_PROPERTY_SETTINGS_VALUE);
-        if (valueString != null) {
-            result = Integer.parseInt(valueString);
-        }
-
-        return result;
+        return valueString;
     }
 
 }

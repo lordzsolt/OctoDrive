@@ -13,9 +13,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ParseWebservice webservice = new ParseWebservice(this, WebserviceConstants.kPARSE_APPLICATION_ID,
-                                                         WebserviceConstants.kPARSE_CLIENT_KEY);
-
-        webservice.regiser("user2@octodrive.com", "user", "ahoy");
+        ParseWebservice.initialise(this, WebserviceConstants.kPARSE_APPLICATION_ID,
+                                   WebserviceConstants.kPARSE_CLIENT_KEY);
     }
 }

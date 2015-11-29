@@ -17,6 +17,11 @@ public class Question extends OctoObject {
         return getQuestions(1, language).get(0);
     }
 
+    public static List<Question> getPredefinedNumberOfQuestions(String language) throws ParseException {
+        int predefinedCount = Settings.questionCount();
+        return getQuestions(predefinedCount, language);
+    }
+
     public static List<Question> getQuestions(int count, String language) throws ParseException {
         ParseQuery<ParseObject> query = ParseQuery.getQuery(
                 WebserviceConstants.kPARSE_OBJECT_QUESTION);
