@@ -1,8 +1,9 @@
-package com.dreamteam.octodrive;
+package com.dreamteam.octodrive.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.dreamteam.octodrive.R;
 import com.dreamteam.octodrive.webservice.ParseWebservice;
 import com.dreamteam.octodrive.webservice.WebserviceConstants;
 

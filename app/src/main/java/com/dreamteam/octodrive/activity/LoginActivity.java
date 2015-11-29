@@ -1,7 +1,5 @@
-package com.dreamteam.octodrive;
+package com.dreamteam.octodrive.activity;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -30,6 +28,8 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.dreamteam.octodrive.R;
 
 import java.util.ArrayList;
 import java.util.List;
