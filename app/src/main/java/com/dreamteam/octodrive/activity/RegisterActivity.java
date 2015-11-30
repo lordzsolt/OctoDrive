@@ -32,6 +32,7 @@ import android.widget.Toast;
 
 import com.dreamteam.octodrive.R;
 import com.dreamteam.octodrive.model.User;
+import com.dreamteam.octodrive.utilities.LoadingView;
 import com.parse.ParseException;
 
 import java.util.ArrayList;
@@ -47,7 +48,7 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
     private EditText mNameView;
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
-    private ProgressDialog mProgressDialog;
+    private LoadingView mLoadingView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,10 +91,7 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
             }
         });
 
-        mProgressDialog = new ProgressDialog(RegisterActivity.this);
-        mProgressDialog.setIndeterminate(true);
-        mProgressDialog.setMessage(getString(R.string.dialog_registering));
-        mProgressDialog.setCancelable(false);
+        mLoadingView = new LoadingView(this, getString(R.string.dialog_registering));
     }
 
     private void populateAutoComplete() {
@@ -181,18 +179,9 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
             focusView.requestFocus();
         }
         else {
-            showProgress(true);
+            mLoadingView.showProgress(true);
             mAuthTask = new UserRegisterTask(name, email, password);
             mAuthTask.execute((Void) null);
-        }
-    }
-
-    private void showProgress(final boolean show) {
-        if (show) {
-            mProgressDialog.show();
-        }
-        else {
-            mProgressDialog.dismiss();
         }
     }
 
@@ -271,7 +260,7 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
         @Override
         protected void onPostExecute(final Boolean success) {
             mAuthTask = null;
-            showProgress(false);
+            mLoadingView.showProgress(false);
 
             if (success) {
                 Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
@@ -286,7 +275,7 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
         @Override
         protected void onCancelled() {
             mAuthTask = null;
-            showProgress(false);
+            mLoadingView.showProgress(false);
         }
     }
 }

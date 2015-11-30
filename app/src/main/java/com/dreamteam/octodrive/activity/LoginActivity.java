@@ -31,6 +31,7 @@ import android.widget.TextView;
 
 import com.dreamteam.octodrive.R;
 import com.dreamteam.octodrive.model.User;
+import com.dreamteam.octodrive.utilities.LoadingView;
 import com.dreamteam.octodrive.webservice.ParseWebservice;
 import com.dreamteam.octodrive.webservice.WebserviceConstants;
 import com.parse.ParseException;
@@ -47,16 +48,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private UserLoginTask mAuthTask = null;
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
-    private ProgressDialog mProgressDialog;
+    private LoadingView mLoadingView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        ParseWebservice.initialise(this, WebserviceConstants.kPARSE_APPLICATION_ID,
-                                   WebserviceConstants.kPARSE_CLIENT_KEY);
-
 
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
@@ -92,10 +89,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
-        mProgressDialog = new ProgressDialog(LoginActivity.this);
-        mProgressDialog.setIndeterminate(true);
-        mProgressDialog.setMessage(getString(R.string.dialog_authenticating));
-        mProgressDialog.setCancelable(false);
+        mLoadingView = new LoadingView(this, getString(R.string.dialog_authenticating));
     }
 
     private void populateAutoComplete() {
@@ -175,18 +169,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             focusView.requestFocus();
         }
         else {
-            showProgress(true);
+            mLoadingView.showProgress(true);
             mAuthTask = new UserLoginTask(email, password);
             mAuthTask.execute((Void) null);
-        }
-    }
-
-    private void showProgress(final boolean show) {
-        if (show) {
-            mProgressDialog.show();
-        }
-        else {
-            mProgressDialog.dismiss();
         }
     }
 
@@ -270,7 +255,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         @Override
         protected void onPostExecute(final Boolean success) {
             mAuthTask = null;
-            showProgress(false);
+            mLoadingView.showProgress(false);
 
             if (success) {
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
@@ -286,7 +271,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         @Override
         protected void onCancelled() {
             mAuthTask = null;
-            showProgress(false);
+            mLoadingView.showProgress(false);
         }
     }
 }
