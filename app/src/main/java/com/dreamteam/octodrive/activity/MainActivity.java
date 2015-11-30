@@ -13,8 +13,5 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        ParseWebservice.initialise(this, WebserviceConstants.kPARSE_APPLICATION_ID,
-                                   WebserviceConstants.kPARSE_CLIENT_KEY);
     }
 }

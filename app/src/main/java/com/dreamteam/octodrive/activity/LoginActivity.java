@@ -30,6 +30,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.dreamteam.octodrive.R;
+import com.dreamteam.octodrive.model.User;
+import com.dreamteam.octodrive.webservice.ParseWebservice;
+import com.dreamteam.octodrive.webservice.WebserviceConstants;
+import com.parse.ParseException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +53,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        ParseWebservice.initialise(this, WebserviceConstants.kPARSE_APPLICATION_ID,
+                                   WebserviceConstants.kPARSE_CLIENT_KEY);
+
 
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
@@ -238,9 +246,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // TODO login
 
             try {
-                Thread.sleep(2000);
+                User.login(mEmail, mPassword);
             }
-            catch (InterruptedException e) {
+            catch (ParseException e) {
+                //TODO: Do something with exception
                 return false;
             }
 

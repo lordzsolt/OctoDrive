@@ -20,6 +20,7 @@ public class User {
 
     public User() {
         _parseUser = new ParseUser();
+        _parseUser.put(WebserviceConstants.kPARSE_PROPERTY_USER_ADMIN, false);
     }
 
     public User(ParseUser parseUser) {

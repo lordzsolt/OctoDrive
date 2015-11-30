@@ -31,6 +31,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dreamteam.octodrive.R;
+import com.dreamteam.octodrive.model.User;
+import com.parse.ParseException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -249,16 +251,19 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            // TODO register
+            User user = new User();
+            user.setName(mName);
+            user.setEmail(mEmail);
+            user.setUsername(mEmail);
+            user.setPassword(mPassword);
 
             try {
-                Thread.sleep(2000);
+                user.save();
             }
-            catch (InterruptedException e) {
+            catch (ParseException e) {
+                //TODO: Do something with the exception
                 return false;
             }
-
-            // TODO register the new account here
 
             return true;
         }
