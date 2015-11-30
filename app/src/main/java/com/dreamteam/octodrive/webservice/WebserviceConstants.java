@@ -1,7 +1,5 @@
 package com.dreamteam.octodrive.webservice;
 
-import java.util.SimpleTimeZone;
-
 /**
  * Created by Lordzsolt on 11/19/2015.
  */

@@ -1,11 +1,8 @@
 package com.dreamteam.octodrive.activity.admin;
-
+;
+import android.support.v4.app.Fragment;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.app.Fragment;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,6 +46,14 @@ public class SettingsFragment extends Fragment {
         mQuestionCountEditText.setOnEditorActionListener(new QuestionCountListener());
         return view;
 
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (!isVisibleToUser && mQuestionCountEditText != null) {
+            mQuestionCountEditText.clearFocus();
+        }
     }
 
     private class QuestionCountListener implements TextView.OnEditorActionListener {

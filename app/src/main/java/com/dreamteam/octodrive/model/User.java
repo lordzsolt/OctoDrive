@@ -1,7 +1,5 @@
 package com.dreamteam.octodrive.model;
 
-import android.webkit.WebSettings;
-
 import com.dreamteam.octodrive.webservice.WebserviceConstants;
 import com.parse.ParseException;
 import com.parse.ParseUser;

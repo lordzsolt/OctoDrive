@@ -2,24 +2,24 @@ package com.dreamteam.octodrive.activity.admin;
 
 
 import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.support.v13.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-
 import android.widget.TextView;
 
 import com.dreamteam.octodrive.R;
 import com.dreamteam.octodrive.webservice.ParseWebservice;
 import com.dreamteam.octodrive.webservice.WebserviceConstants;
 
-public class AdminActivity extends Activity {
+public class AdminActivity extends FragmentActivity {
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
 
@@ -29,7 +29,7 @@ public class AdminActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getFragmentManager());
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
@@ -62,7 +62,7 @@ public class AdminActivity extends Activity {
 
         private String[] titles;
 
-        public SectionsPagerAdapter(FragmentManager fm) {
+        public SectionsPagerAdapter( FragmentManager fm) {
             super(fm);
             titles = new String[] {getString(R.string.admin_page_title_questions),
                                    getString(R.string.admin_page_title_users),

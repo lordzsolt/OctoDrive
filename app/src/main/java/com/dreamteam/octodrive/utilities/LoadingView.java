@@ -3,8 +3,6 @@ package com.dreamteam.octodrive.utilities;
 import android.app.Activity;
 import android.app.ProgressDialog;
 
-import com.dreamteam.octodrive.R;
-
 /**
  * Created by Lordzsolt on 11/30/2015.
  */
