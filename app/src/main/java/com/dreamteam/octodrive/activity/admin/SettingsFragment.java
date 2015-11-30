@@ -21,6 +21,9 @@ public class SettingsFragment extends Fragment {
     private LoadingView mLoadingView;
     private QuestionCountTask mQuestionCountTask;
 
+    private final static int kDEFAULT_QUESTION_COUNT_VALUE = -1;
+    private int mQuestionCount = kDEFAULT_QUESTION_COUNT_VALUE;
+
     public SettingsFragment() {}
 
     public static SettingsFragment newInstance() {
@@ -31,10 +34,6 @@ public class SettingsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mLoadingView = new LoadingView(this.getActivity(), getString(R.string.dialog_loading));
-        mLoadingView.showProgress(true);
-        mQuestionCountTask = new QuestionCountTask();
-        mQuestionCountTask.execute((Void) null);
     }
 
     @Override
@@ -54,6 +53,12 @@ public class SettingsFragment extends Fragment {
         if (!isVisibleToUser && mQuestionCountEditText != null) {
             mQuestionCountEditText.clearFocus();
         }
+        else if(isVisibleToUser && mQuestionCount == kDEFAULT_QUESTION_COUNT_VALUE) {
+            mLoadingView = new LoadingView(this.getActivity(), getString(R.string.dialog_loading));
+            mLoadingView.showProgress(true);
+            mQuestionCountTask = new QuestionCountTask();
+            mQuestionCountTask.execute((Void) null);
+        }
     }
 
     private class QuestionCountListener implements TextView.OnEditorActionListener {
@@ -71,6 +76,7 @@ public class SettingsFragment extends Fragment {
                     return true;
                 }
                 mLoadingView.showProgress(true);
+                mQuestionCount = inputValue;
                 SetQuestionCountTask setTask = new SetQuestionCountTask(inputValue);
                 setTask.execute();
             }
@@ -90,6 +96,7 @@ public class SettingsFragment extends Fragment {
         @Override
         protected void onPostExecute(Integer integer) {
             mLoadingView.showProgress(false);
+            mQuestionCount = integer;
             mQuestionCountEditText.setText(String.valueOf(integer));
         }
 

@@ -1,5 +1,6 @@
 package com.dreamteam.octodrive.model;
 
+import com.dreamteam.octodrive.interfaces.Listable;
 import com.dreamteam.octodrive.webservice.WebserviceConstants;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -11,23 +12,25 @@ import java.util.List;
 /**
  * Created by Lord Zsolt on 11/20/2015.
  */
-public class Question extends OctoObject {
-
-    public static Question getQuestion(String language) throws ParseException {
-        return getQuestions(1, language).get(0);
-    }
+public class Question extends OctoObject implements Listable {
 
     public static List<Question> getPredefinedNumberOfQuestions(String language) throws ParseException {
         int predefinedCount = Settings.questionCount();
-        return getQuestions(predefinedCount, language);
+        return getQuestions(predefinedCount, language, true);
     }
 
-    public static List<Question> getQuestions(int count, String language) throws ParseException {
+    public static List<Question> getQuestions(int count, String language, boolean onlyActive) throws ParseException {
         ParseQuery<ParseObject> query = ParseQuery.getQuery(
                 WebserviceConstants.kPARSE_OBJECT_QUESTION);
-        query.setLimit(count);
-        query.whereEqualTo(WebserviceConstants.kPARSE_PROPERTY_QUESTION_ACTIVE, true);
-        query.whereEqualTo(WebserviceConstants.kPARSE_PROPERTY_QUESTION_LANGUAGE, language);
+        if (count > 0) {
+            query.setLimit(count);
+        }
+        if (onlyActive) {
+            query.whereEqualTo(WebserviceConstants.kPARSE_PROPERTY_QUESTION_ACTIVE, true);
+        }
+        if (language != null) {
+            query.whereEqualTo(WebserviceConstants.kPARSE_PROPERTY_QUESTION_LANGUAGE, language);
+        }
         List<ParseObject> questions = query.find();
 
         List<Question> array = new ArrayList<>();
@@ -38,12 +41,21 @@ public class Question extends OctoObject {
         return array;
     }
 
+    public static List<Question> getAllQuestions() throws ParseException {
+        return getQuestions(0, null, false);
+    }
+
     public Question() {
         _parseObject = new ParseObject(WebserviceConstants.kPARSE_OBJECT_QUESTION);
     }
 
     public Question(ParseObject question) {
         _parseObject = question;
+    }
+
+    @Override
+    public String displayText() {
+        return message();
     }
 
     public void save() throws ParseException {
