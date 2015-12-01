@@ -56,4 +56,8 @@
     <string name="question_edit_image">Image:</string>
     <string name="action_save">Save</string>
 
+    <!-- MainActivity -->
+    <string name="button_practice">Practice</string>
+    <string name="button_exam">Exam</string>
+
 </resources>

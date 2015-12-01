@@ -30,6 +30,8 @@ import android.widget.Toast;
 import com.dreamteam.octodrive.R;
 import com.dreamteam.octodrive.model.User;
 import com.dreamteam.octodrive.utilities.LoadingView;
+import com.dreamteam.octodrive.webservice.ParseWebservice;
+import com.dreamteam.octodrive.webservice.WebserviceConstants;
 import com.parse.ParseException;
 
 import java.util.ArrayList;

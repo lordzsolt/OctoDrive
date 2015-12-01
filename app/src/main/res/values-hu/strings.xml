@@ -42,4 +42,6 @@
     <string name="text_question_count">Kérdés per teszt</string>
     <string name="action_save">Mentés</string>
     <string name="error_invalid_intent">Belső munkameneti hiba.</string>
+    <string name="button_practice">Próba</string>
+    <string name="button_exam">Vizsga</string>
 </resources>

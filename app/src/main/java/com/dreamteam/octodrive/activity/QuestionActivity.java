@@ -10,6 +10,7 @@ import com.dreamteam.octodrive.R;
 public class QuestionActivity extends AppCompatActivity {
 
     private String userId;
+    private boolean isPractice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +20,7 @@ public class QuestionActivity extends AppCompatActivity {
         Bundle bundle = this.getIntent().getExtras();
         if (bundle != null && bundle.containsKey("userId")) {
             userId = bundle.getString("userId");
+            isPractice = bundle.getBoolean("isPractice", true);
         }
 
         if (userId == null || userId.isEmpty()) {
