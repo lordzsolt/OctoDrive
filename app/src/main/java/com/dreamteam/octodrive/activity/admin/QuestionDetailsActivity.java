@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -25,8 +26,10 @@ import com.dreamteam.octodrive.constants.KeyConstants;
 import com.dreamteam.octodrive.model.Question;
 import com.dreamteam.octodrive.utilities.LoadingView;
 import com.dreamteam.octodrive.webservice.WebserviceConstants;
+import com.parse.GetDataCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
+import com.parse.ParseImageView;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
@@ -44,6 +47,8 @@ public class QuestionDetailsActivity extends AppCompatActivity {
 
     private LoadingView mLoadingView;
     private UpdateTask mUpdateUserTask;
+    private ImageView ivQuestion;
+    private DownloadImageTask imgDlTask = null;
 
     private ParseFile parseImage = null;
 
@@ -94,7 +99,20 @@ public class QuestionDetailsActivity extends AppCompatActivity {
         int index = Arrays.asList(languages).indexOf(_question.language());
         languageSpinner.setSelection(index);
 
-        ImageButton imageBtn = (ImageButton)findViewById(R.id.imageButton);
+        ivQuestion = (ImageView)findViewById(R.id.imageView_edit_question);
+
+        String imgUrl = _question.imageUrl();
+        if (imgUrl != null && !imgUrl.isEmpty()) {
+            if (imgDlTask != null) {
+                imgDlTask.cancel(true);
+                imgDlTask = null;
+            }
+
+            imgDlTask = new DownloadImageTask(ivQuestion);
+            imgDlTask.execute(imgUrl);
+        }
+
+        Button imageBtn = (Button) findViewById(R.id.imageButton);
         imageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,8 +120,7 @@ public class QuestionDetailsActivity extends AppCompatActivity {
                 intent.setType("image/*");
                 intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
                 intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                //startActivityForResult(intent, 100);
-                startActivityForResult(Intent.createChooser(intent, ""), 100);
+                startActivityForResult(Intent.createChooser(intent, getString(R.string.question_edit_image)), 100);
             }
         });
     }
@@ -133,6 +150,18 @@ public class QuestionDetailsActivity extends AppCompatActivity {
                     file.saveInBackground(new SaveCallback() {
                         public void done(ParseException e) {
                             parseImage = file;
+
+                            String imgUrl = file.getUrl();
+                            if (imgUrl != null && !imgUrl.isEmpty()) {
+                                if (imgDlTask != null) {
+                                    imgDlTask.cancel(true);
+                                    imgDlTask = null;
+                                }
+
+                                imgDlTask = new DownloadImageTask(ivQuestion);
+                                imgDlTask.execute(imgUrl);
+                            }
+
                             mLoadingView.showProgress(false);
                         }
                     });
@@ -234,6 +263,35 @@ public class QuestionDetailsActivity extends AppCompatActivity {
         @Override
         protected void onCancelled() {
             mLoadingView.showProgress(false);
+        }
+    }
+
+    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+
+        ImageView bmImage;
+
+        public DownloadImageTask(ImageView bmImage) {
+            this.bmImage = bmImage;
+            bmImage.setVisibility(View.INVISIBLE);
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            Bitmap mIcon11 = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                mIcon11 = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("imgdl", e.getMessage());
+                e.printStackTrace();
+            }
+            return mIcon11;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            bmImage.setImageBitmap(result);
+            bmImage.setVisibility(View.VISIBLE);
+            imgDlTask = null;
         }
     }
 

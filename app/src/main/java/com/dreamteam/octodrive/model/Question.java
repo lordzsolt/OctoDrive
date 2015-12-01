@@ -62,6 +62,8 @@ public class Question extends OctoObject implements Listable, Parcelable {
         return new Question(object);
     }
 
+    private String imageUrl;
+
     public Question() {
         _parseObject = new ParseObject(WebserviceConstants.kPARSE_OBJECT_QUESTION);
     }
@@ -92,6 +94,8 @@ public class Question extends OctoObject implements Listable, Parcelable {
 
         boolean active = in.readByte() != 0;
         this.setActive(active);
+
+        imageUrl = in.readString();
     }
 
     @Override
@@ -153,6 +157,16 @@ public class Question extends OctoObject implements Listable, Parcelable {
         _parseObject.put(WebserviceConstants.kPARSE_PROPERTY_QUESTION_IMAGE, image);
     }
 
+    public String imageUrl() {
+        if (imageUrl != null && !imageUrl.isEmpty()) {
+            return imageUrl;
+        }
+        else {
+            ParseFile pf = image();
+            return pf != null ? pf.getUrl() : "";
+        }
+    }
+
     public boolean active() {
         return _parseObject.getBoolean(WebserviceConstants.kPARSE_PROPERTY_QUESTION_ACTIVE);
     }
@@ -182,6 +196,6 @@ public class Question extends OctoObject implements Listable, Parcelable {
         dest.writeList(correctAnswers());
         dest.writeString(language());
         dest.writeByte((byte) (active() ? 1 : 0));
-        //TODO: Write Image
+        dest.writeString(imageUrl());
     }
 }

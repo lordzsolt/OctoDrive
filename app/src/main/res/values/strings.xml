@@ -62,6 +62,7 @@
     <string name="prompt_question_answer3">C</string>
     <string name="question_edit_correct">Correct:</string>
     <string name="question_edit_active">Active</string>
+    <string name="question_edit_change">Change…</string>
     <string name="question_edit_language">Language:</string>
     <string name="question_edit_image">Image:</string>
     <string name="action_save">Save</string>
