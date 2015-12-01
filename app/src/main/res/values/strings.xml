@@ -55,4 +55,9 @@
     <string name="question_edit_image">Image:</string>
     <string name="action_save">Save</string>
 
+    <!-- UserDetailsActivity -->
+    <string name="user_details_name">Name:</string>
+    <string name="user_details_email">Email:</string>
+    <string name="user_details_admin">Admin</string>
+
 </resources>
