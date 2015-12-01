@@ -71,7 +71,7 @@ public class Question extends OctoObject implements Listable, Parcelable {
         this();
 
         String objectId = in.readString();
-        _parseObject.setObjectId(objectId);
+        setObjectId(objectId);
 
         String message = in.readString();
         this.setMessage(message);

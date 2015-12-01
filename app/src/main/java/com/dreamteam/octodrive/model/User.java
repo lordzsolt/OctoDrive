@@ -17,6 +17,8 @@ import java.util.List;
  */
 public class User implements Listable, Parcelable {
 
+    private String _objectId;
+
     private ParseUser _parseUser;
 
     public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>() {
@@ -60,7 +62,7 @@ public class User implements Listable, Parcelable {
         this();
 
         String objectId = in.readString();
-        _parseUser.setObjectId(objectId);
+        setObjectId(objectId);
 
         String name = in.readString();
         this.setName(name);
@@ -91,7 +93,14 @@ public class User implements Listable, Parcelable {
     }
 
     public String objectId() {
-        return _parseUser.getObjectId();
+        if (_objectId == null) {
+            _objectId = _parseUser.getObjectId();
+        }
+        return _objectId;
+    }
+
+    public void setObjectId(String objectId) {
+        _objectId = objectId;
     }
 
     public String name() {

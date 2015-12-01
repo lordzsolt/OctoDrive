@@ -27,7 +27,7 @@ public class QuestionDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_question_details);
 
         Intent intent = getIntent();
-        String objectId = intent.getStringExtra(KeyConstants.kKEY_CONSTANT_ADMIN_OBJECT_ID);
+        Question question = intent.getExtras().getParcelable(KeyConstants.kKEY_CONSTANT_ADMIN_EDIT_OBJECT);
 
         //        EditText messageEdit = (EditText)findViewById(R.id.question_edit_message);
         //        messageEdit.setText(_question.message());
