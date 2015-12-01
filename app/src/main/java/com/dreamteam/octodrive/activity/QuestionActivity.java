@@ -15,7 +15,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dreamteam.octodrive.R;
+import com.dreamteam.octodrive.activity.admin.AdminActivity;
 import com.dreamteam.octodrive.model.Question;
+import com.dreamteam.octodrive.model.Settings;
 import com.dreamteam.octodrive.model.User;
 import com.dreamteam.octodrive.utilities.LoadingView;
 import com.parse.ParseException;
@@ -29,6 +31,7 @@ import java.util.Locale;
 public class QuestionActivity extends AppCompatActivity {
 
     private GetQuestionsTask mQuestionsTask = null;
+    private FinishTestTask mFinishTask = null;
     private LoadingView mLoadingView;
 
     private String userId;
@@ -114,6 +117,12 @@ public class QuestionActivity extends AppCompatActivity {
 
         btnFinish = (Button)findViewById(R.id.button_finish);
         btnFinish.setEnabled(false);
+        btnFinish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finishTest();
+            }
+        });
 
         mLoadingView = new LoadingView(this, getString(R.string.dialog_preparing));
         mLoadingView.showProgress(true);
@@ -196,6 +205,17 @@ public class QuestionActivity extends AppCompatActivity {
         btnFinish.setEnabled(answers.size() == questions.size());
     }
 
+    private void finishTest() {
+        if (questions.size() != answers.size()) {
+            return;
+        }
+
+        mLoadingView = new LoadingView(this, getString(R.string.dialog_processing));
+        mLoadingView.showProgress(true);
+        mFinishTask = new FinishTestTask();
+        mFinishTask.execute((Void) null);
+    }
+
     public class GetQuestionsTask extends AsyncTask<Void, Void, Boolean> {
 
         @Override
@@ -224,6 +244,73 @@ public class QuestionActivity extends AppCompatActivity {
             else {
                 Toast.makeText(QuestionActivity.this, R.string.error_fetch_question, Toast.LENGTH_SHORT).show();
                 QuestionActivity.this.finish();
+            }
+
+            mQuestionsTask = null;
+            mLoadingView.showProgress(false);
+        }
+
+        @Override
+        protected void onCancelled() {
+            mQuestionsTask = null;
+            mLoadingView.showProgress(false);
+            QuestionActivity.this.finish();
+        }
+    }
+
+    public class FinishTestTask extends AsyncTask<Void, Void, Boolean> {
+
+        private boolean passed;
+        private int correct;
+
+        @Override
+        protected Boolean doInBackground(Void... params) {
+            correct = 0;
+
+            for (int i = 0; i < questions.size(); i++) {
+                Question q = questions.get(i);
+                List<Boolean> cor = q.correctAnswers();
+                List<Boolean> ans = answers.get(q.objectId());
+
+                boolean all = true;
+
+                for (int j = 0; j < 3; j++) {
+                    if (cor.get(j) != ans.get(j)) {
+                        all = false;
+                        break;
+                    }
+                }
+
+                if (all) {
+                    correct++;
+                }
+            }
+
+            int min = Settings.minimumPass();
+
+            if (min <= 0) {
+                return false;
+            }
+
+            passed = correct >= min;
+
+            // TODO write results to db
+
+            return true;
+        }
+
+        @Override
+        protected void onPostExecute(final Boolean success) {
+            if (success) {
+                Intent intent = new Intent(QuestionActivity.this, FinishActivity.class);
+                intent.putExtra("passed", passed);
+                intent.putExtra("correct", correct);
+                intent.putExtra("total", questions.size());
+                startActivity(intent);
+                QuestionActivity.this.finish();
+            }
+            else {
+                Toast.makeText(QuestionActivity.this, R.string.error_db_comm, Toast.LENGTH_SHORT).show();
             }
 
             mQuestionsTask = null;

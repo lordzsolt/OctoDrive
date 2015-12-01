@@ -28,16 +28,17 @@
     <!-- QuestionActivity -->
     <string name="error_invalid_intent">Internal session error.</string>
     <string name="dialog_preparing">Preparing…</string>
+    <string name="dialog_processing">Processing…</string>
     <string name="action_previous">Previous</string>
     <string name="action_next">Next</string>
     <string name="action_finish">Finish</string>
     <string name="error_fetch_question">Failed to get questions.</string>
+    <string name="error_db_comm">Failed to communicate with database.</string>
 
     <!-- FinishActivity -->
     <string name="text_failed">You failed.</string>
-    <string name="text_passed">You passed.</string>
-    <string name="text_correct_ans">Correctly answered:</string>
-    <string name="action_settings">Settings</string>
+    <string name="text_passed">You passed!</string>
+    <string name="text_correct_ans">Correctly answered %1$d out of %2$d questions.</string>
 
     <!-- AdminActivity -->
     <string name="title_activity_admin">Administration</string>
@@ -50,6 +51,7 @@
     <string name="text_question_count">Questions per test</string>
     <string name="dialog_loading">Loading…</string>
     <string name="invalid_input">Invalid input.</string>
+    <string name="action_settings">Settings</string>
 
     <!-- QuestionDetailsActivity -->
     <string name="prompt_question_message">Question</string>

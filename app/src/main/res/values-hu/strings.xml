@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">OctoDrive</string>
+    <string name="app_name">NyócDrájv</string>
     <string name="prompt_password">Jelszó</string>
     <string name="prompt_email">Email</string>
     <string name="error_invalid_password">Jelszó túl rövid.</string>
@@ -20,9 +20,9 @@
     <string name="action_finish">Befejezés</string>
     <string name="action_next">Következő</string>
     <string name="action_previous">Előző</string>
-    <string name="text_correct_ans">Helyesen megválaszolva:</string>
-    <string name="text_passed">Sikertelen teszt.</string>
-    <string name="text_failed">Sikeres teszt.</string>
+    <string name="text_correct_ans">Helyesen válaszoltál %1$d kérdésre %2$d közül.</string>
+    <string name="text_passed">Sikeres teszt!</string>
+    <string name="text_failed">Sikertelen teszt.</string>
     <string name="action_settings">Beállítások</string>
     <string name="admin_page_title_questions">KÉRDÉSEK</string>
     <string name="admin_page_title_settings">BEÁLLÍTÁSOK</string>
@@ -46,4 +46,6 @@
     <string name="button_exam">Vizsga</string>
     <string name="error_fetch_question">Hiba a kérdések letöltése közben.</string>
     <string name="dialog_preparing">Előkészítés…</string>
+    <string name="dialog_processing">Feldolgozás…</string>
+    <string name="error_db_comm">Hiba az adatbázissal való kommunikálás közben.</string>
 </resources>
