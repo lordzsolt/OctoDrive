@@ -22,6 +22,7 @@
     <string name="dialog_registering">Registering…</string>
 
     <!-- QuestionActivity -->
+    <string name="error_invalid_intent">Internal session error.</string>
     <string name="action_previous">Previous</string>
     <string name="action_next">Next</string>
     <string name="action_finish">Finish</string>

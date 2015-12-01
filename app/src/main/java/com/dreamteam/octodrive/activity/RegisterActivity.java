@@ -47,6 +47,8 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
     private EditText mPasswordView;
     private LoadingView mLoadingView;
 
+    private String userId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -245,9 +247,9 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
 
             try {
                 user.save();
+                userId = user.objectId();
             }
             catch (ParseException e) {
-                //TODO: Do something with the exception
                 return false;
             }
 
@@ -261,6 +263,7 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
 
             if (success) {
                 Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                intent.putExtra("userId", userId);
                 startActivity(intent);
                 finish();
             }
