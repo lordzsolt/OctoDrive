@@ -6,15 +6,13 @@ import android.os.Parcelable;
 import com.dreamteam.octodrive.interfaces.Listable;
 import com.dreamteam.octodrive.webservice.WebserviceConstants;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Lord Zsolt on 11/20/2015.
- */
 public class Question extends OctoObject implements Listable, Parcelable {
 
     public static final Parcelable.Creator<Question> CREATOR = new Parcelable.Creator<Question>() {
@@ -147,12 +145,12 @@ public class Question extends OctoObject implements Listable, Parcelable {
         _parseObject.put(WebserviceConstants.kPARSE_PROPERTY_QUESTION_CORRECT, correct);
     }
 
-    public void image() {
-
+    public ParseFile image() {
+        return _parseObject.getParseFile(WebserviceConstants.kPARSE_PROPERTY_QUESTION_IMAGE);
     }
 
-    public void setImage() {
-
+    public void setImage(ParseFile image) {
+        _parseObject.put(WebserviceConstants.kPARSE_PROPERTY_QUESTION_IMAGE, image);
     }
 
     public boolean active() {
