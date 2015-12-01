@@ -31,6 +31,8 @@
             android:name=".activity.admin.QuestionDetailsActivity"
             android:label="@string/title_activity_question_details">
         </activity>
+        <activity android:name=".activity.admin.UserDetailsActivity">
+        </activity>
     </application>
 
 </manifest>

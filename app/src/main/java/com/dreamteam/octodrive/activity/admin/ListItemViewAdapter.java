@@ -46,14 +46,14 @@ public class ListItemViewAdapter extends RecyclerView.Adapter<ListItemViewAdapte
             public void onClick(View v) {
                 Intent intent = null;
                 if (item instanceof User) {
-                    intent = new Intent(mContext, QuestionDetailsActivity.class);
+                    intent = new Intent(mContext, UserDetailsActivity.class);
                     User user = (User)item;
-//                    intent.putExtra(KeyConstants.kKEY_CONSTANT_ADMIN_EDIT_OBJECT, user);
+                    intent.putExtra(KeyConstants.kKEY_CONSTANT_ADMIN_OBJECT_ID, user.objectId());
                 }
                 else if (item instanceof Question) {
                     intent = new Intent(mContext, QuestionDetailsActivity.class);
                     Question question = (Question)item;
-                    intent.putExtra(KeyConstants.kKEY_CONSTANT_ADMIN_EDIT_OBJECT, question);
+                    intent.putExtra(KeyConstants.kKEY_CONSTANT_ADMIN_OBJECT_ID, question.objectId());
                 }
                 mContext.startActivity(intent);
             }

@@ -15,18 +15,7 @@ import java.util.List;
 /**
  * Created by Lord Zsolt on 11/20/2015.
  */
-public class Question extends OctoObject implements Listable, Parcelable {
-
-    public static final Parcelable.Creator<Question> CREATOR = new Parcelable.Creator<Question>() {
-        public Question createFromParcel(Parcel in) {
-            return new Question(in);
-        }
-
-        @Override
-        public Question[] newArray(int size) {
-            return new Question[size];
-        }
-    };
+public class Question extends OctoObject implements Listable {
 
     public static List<Question> getPredefinedNumberOfQuestions(String language) throws ParseException {
         int predefinedCount = Settings.questionCount();
@@ -65,26 +54,6 @@ public class Question extends OctoObject implements Listable, Parcelable {
 
     public Question(ParseObject question) {
         _parseObject = question;
-    }
-
-    public Question(Parcel in) {
-        this();
-        String message = in.readString();
-        this.setMessage(message);
-
-        List<String> answers = new ArrayList<>(3);
-        in.readList(answers, null);
-        this.setAnswers(answers);
-
-        List<Boolean> correntAnswers = new ArrayList<>(3);
-        in.readList(correntAnswers, null);
-        this.setCorrectAnswers(correntAnswers);
-
-        String language = in.readString();
-        this.setLanguage(language);
-
-        boolean active = in.readByte() != 0;
-        this.setActive(active);
     }
 
     @Override
@@ -162,20 +131,5 @@ public class Question extends OctoObject implements Listable, Parcelable {
 
     public void setLanguage(String language) {
         _parseObject.put(WebserviceConstants.kPARSE_PROPERTY_QUESTION_LANGUAGE, language);
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(message());
-        dest.writeList(answers());
-        dest.writeList(correctAnswers());
-        dest.writeString(language());
-        dest.writeByte((byte)(active() ? 1 : 0));
-        //TODO: Write Image
     }
 }

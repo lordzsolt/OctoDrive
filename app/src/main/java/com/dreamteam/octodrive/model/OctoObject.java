@@ -12,4 +12,8 @@ public abstract class OctoObject {
     public ParseObject parseObject() {
         return _parseObject;
     }
+
+    public String objectId() {
+        return _parseObject.getObjectId();
+    }
 }

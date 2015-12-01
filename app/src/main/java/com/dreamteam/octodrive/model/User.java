@@ -1,5 +1,8 @@
 package com.dreamteam.octodrive.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.dreamteam.octodrive.interfaces.Listable;
 import com.dreamteam.octodrive.webservice.WebserviceConstants;
 import com.parse.ParseException;
@@ -60,6 +63,10 @@ public class User implements Listable {
         return _parseUser;
     }
 
+    public String objectId() {
+        return _parseUser.getObjectId();
+    }
+
     public String name() {
         return _parseUser.getString(WebserviceConstants.kPARSE_PROPERTY_USER_NAME);
     }
@@ -92,4 +99,7 @@ public class User implements Listable {
         return _parseUser.getBoolean(WebserviceConstants.kPARSE_PROPERTY_USER_ADMIN);
     }
 
+    public void setAdmin(boolean admin) {
+        _parseUser.put(WebserviceConstants.kPARSE_PROPERTY_USER_ADMIN, admin);
+    }
 }
