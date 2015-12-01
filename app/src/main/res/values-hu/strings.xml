@@ -23,4 +23,21 @@
     <string name="text_correct_ans">Helyesen megválaszolva:</string>
     <string name="text_passed">Sikertelen teszt.</string>
     <string name="text_failed">Sikeres teszt.</string>
+    <string name="action_settings">Beállítások</string>
+    <string name="admin_page_title_questions">KÉRDÉSEK</string>
+    <string name="admin_page_title_settings">BEÁLLÍTÁSOK</string>
+    <string name="admin_page_title_users">FELHASZNÁLÓK</string>
+    <string name="dialog_loading">Betöltés…</string>
+    <string name="invalid_input">Hibás adat.</string>
+    <string name="prompt_question_answer1">A</string>
+    <string name="prompt_question_answer2">B</string>
+    <string name="prompt_question_answer3">C</string>
+    <string name="prompt_question_message">Kérdés</string>
+    <string name="question_edit_active">Aktív</string>
+    <string name="question_edit_correct">Helyes:</string>
+    <string name="question_edit_image">Kép:</string>
+    <string name="question_edit_language">Nyelv:</string>
+    <string name="title_activity_admin">Adminisztráció</string>
+    <string name="title_activity_question_details">Kérdés</string>
+    <string name="text_question_count">Kérdés per teszt</string>
 </resources>

@@ -15,8 +15,6 @@ import com.dreamteam.octodrive.R;
 import com.dreamteam.octodrive.model.Settings;
 import com.dreamteam.octodrive.utilities.LoadingView;
 
-;
-
 public class SettingsFragment extends Fragment {
 
     private EditText mQuestionCountEditText;
