@@ -1,5 +1,9 @@
 package com.dreamteam.octodrive.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import com.dreamteam.octodrive.interfaces.Listable;
 import com.dreamteam.octodrive.webservice.WebserviceConstants;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -11,23 +15,36 @@ import java.util.List;
 /**
  * Created by Lord Zsolt on 11/20/2015.
  */
-public class Question extends OctoObject {
+public class Question extends OctoObject implements Listable, Parcelable {
 
-    public static Question getQuestion(String language) throws ParseException {
-        return getQuestions(1, language).get(0);
-    }
+    public static final Parcelable.Creator<Question> CREATOR = new Parcelable.Creator<Question>() {
+        public Question createFromParcel(Parcel in) {
+            return new Question(in);
+        }
+
+        @Override
+        public Question[] newArray(int size) {
+            return new Question[size];
+        }
+    };
 
     public static List<Question> getPredefinedNumberOfQuestions(String language) throws ParseException {
         int predefinedCount = Settings.questionCount();
-        return getQuestions(predefinedCount, language);
+        return getQuestions(predefinedCount, language, true);
     }
 
-    public static List<Question> getQuestions(int count, String language) throws ParseException {
+    public static List<Question> getQuestions(int count, String language, boolean onlyActive) throws ParseException {
         ParseQuery<ParseObject> query = ParseQuery.getQuery(
                 WebserviceConstants.kPARSE_OBJECT_QUESTION);
-        query.setLimit(count);
-        query.whereEqualTo(WebserviceConstants.kPARSE_PROPERTY_QUESTION_ACTIVE, true);
-        query.whereEqualTo(WebserviceConstants.kPARSE_PROPERTY_QUESTION_LANGUAGE, language);
+        if (count > 0) {
+            query.setLimit(count);
+        }
+        if (onlyActive) {
+            query.whereEqualTo(WebserviceConstants.kPARSE_PROPERTY_QUESTION_ACTIVE, true);
+        }
+        if (language != null) {
+            query.whereEqualTo(WebserviceConstants.kPARSE_PROPERTY_QUESTION_LANGUAGE, language);
+        }
         List<ParseObject> questions = query.find();
 
         List<Question> array = new ArrayList<>();
@@ -38,12 +55,50 @@ public class Question extends OctoObject {
         return array;
     }
 
+    public static List<Question> getAllQuestions() throws ParseException {
+        return getQuestions(0, null, false);
+    }
+
+    public static Question newQuestionWithObjectId(String objectId) {
+        ParseObject object = ParseObject.createWithoutData(WebserviceConstants.kPARSE_OBJECT_QUESTION, objectId);
+        return new Question(object);
+    }
+
     public Question() {
         _parseObject = new ParseObject(WebserviceConstants.kPARSE_OBJECT_QUESTION);
     }
 
     public Question(ParseObject question) {
         _parseObject = question;
+    }
+
+    public Question(Parcel in) {
+        this();
+
+        String objectId = in.readString();
+        setObjectId(objectId);
+
+        String message = in.readString();
+        this.setMessage(message);
+
+        List<String> answers = new ArrayList<>(3);
+        in.readList(answers, null);
+        this.setAnswers(answers);
+
+        List<Boolean> correntAnswers = new ArrayList<>(3);
+        in.readList(correntAnswers, null);
+        this.setCorrectAnswers(correntAnswers);
+
+        String language = in.readString();
+        this.setLanguage(language);
+
+        boolean active = in.readByte() != 0;
+        this.setActive(active);
+    }
+
+    @Override
+    public String displayText() {
+        return message();
     }
 
     public void save() throws ParseException {
@@ -116,5 +171,21 @@ public class Question extends OctoObject {
 
     public void setLanguage(String language) {
         _parseObject.put(WebserviceConstants.kPARSE_PROPERTY_QUESTION_LANGUAGE, language);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(objectId());
+        dest.writeString(message());
+        dest.writeList(answers());
+        dest.writeList(correctAnswers());
+        dest.writeString(language());
+        dest.writeByte((byte) (active() ? 1 : 0));
+        //TODO: Write Image
     }
 }
