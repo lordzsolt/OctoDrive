@@ -44,4 +44,6 @@
     <string name="error_invalid_intent">Belső munkameneti hiba.</string>
     <string name="button_practice">Próba</string>
     <string name="button_exam">Vizsga</string>
+    <string name="error_fetch_question">Hiba a kérdések letöltése közben.</string>
+    <string name="dialog_preparing">Előkészítés…</string>
 </resources>

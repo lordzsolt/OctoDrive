@@ -21,11 +21,17 @@
     <string name="action_sign_in_instead">Already registered? Sign in instead &gt;</string>
     <string name="dialog_registering">Registering…</string>
 
+    <!-- MainActivity -->
+    <string name="button_practice">Practice</string>
+    <string name="button_exam">Exam</string>
+
     <!-- QuestionActivity -->
     <string name="error_invalid_intent">Internal session error.</string>
+    <string name="dialog_preparing">Preparing…</string>
     <string name="action_previous">Previous</string>
     <string name="action_next">Next</string>
     <string name="action_finish">Finish</string>
+    <string name="error_fetch_question">Failed to get questions.</string>
 
     <!-- FinishActivity -->
     <string name="text_failed">You failed.</string>
@@ -55,9 +61,5 @@
     <string name="question_edit_language">Language:</string>
     <string name="question_edit_image">Image:</string>
     <string name="action_save">Save</string>
-
-    <!-- MainActivity -->
-    <string name="button_practice">Practice</string>
-    <string name="button_exam">Exam</string>
 
 </resources>
