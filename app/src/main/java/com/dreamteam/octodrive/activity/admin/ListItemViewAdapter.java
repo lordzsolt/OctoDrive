@@ -53,6 +53,7 @@ public class ListItemViewAdapter extends RecyclerView.Adapter<ListItemViewAdapte
                 else if (item instanceof Question) {
                     intent = new Intent(mContext, QuestionDetailsActivity.class);
                     Question question = (Question)item;
+                    intent.putExtra(KeyConstants.kKEY_CONSTANT_ADMIN_NEW_QUESTION, false);
                     intent.putExtra(KeyConstants.kKEY_CONSTANT_ADMIN_EDIT_OBJECT, question);
                 }
                 mContext.startActivity(intent);

@@ -3,6 +3,7 @@ package com.dreamteam.octodrive.activity.admin;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -25,6 +26,8 @@ public class ListFragment extends Fragment {
     private Class mDataClass;
     private List<? extends Listable> mValues;
 
+    private boolean _canAddNew;
+
     private LoadingView mLoadingView;
     private AllUsersTask mUserTask;
 
@@ -32,8 +35,9 @@ public class ListFragment extends Fragment {
         mDataClass = dataClass;
     }
 
-    public static ListFragment newInstance(Class dataClass) {
+    public static ListFragment newInstance(Class dataClass, boolean canAddNew) {
         ListFragment fragment = new ListFragment(dataClass);
+        fragment._canAddNew = canAddNew;
         return fragment;
     }
 
@@ -45,7 +49,14 @@ public class ListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_item_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_item_list, container, false);
+        if (_canAddNew) {
+            //TODO: Add FAB somehow....
+//            RecyclerView recyclerView = (RecyclerView)view;
+//            FloatingActionButton fab = (FloatingActionButton)view.findViewById(R.id.button_add_new);
+//            fab.setVisibility(View.GONE);
+        }
+        return view;
     }
 
     @Override

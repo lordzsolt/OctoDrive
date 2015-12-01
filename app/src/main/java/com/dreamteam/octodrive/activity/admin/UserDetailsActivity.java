@@ -8,16 +8,20 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.CheckBox;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.dreamteam.octodrive.R;
 import com.dreamteam.octodrive.constants.KeyConstants;
+import com.dreamteam.octodrive.model.Result;
 import com.dreamteam.octodrive.model.User;
 import com.dreamteam.octodrive.utilities.LoadingView;
 import com.dreamteam.octodrive.webservice.WebserviceConstants;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
+
+import java.util.List;
 
 public class UserDetailsActivity extends AppCompatActivity {
 
@@ -80,6 +84,31 @@ public class UserDetailsActivity extends AppCompatActivity {
         }
     }
 
+    private class GetResultsTask extends AsyncTask<Void, Void, List<Result>> {
+        ParseUser _parseUser;
+        GetResultsTask() {}
+
+        @Override
+        protected List<Result> doInBackground(Void... params) {
+//            try {
+//                _parseObject.save();
+//            }
+//            catch (ParseException e) {
+//                //TODO: Do something
+//            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(List<Result> results) {
+            mLoadingView.showProgress(false);
+        }
+
+        @Override
+        protected void onCancelled() {
+            mLoadingView.showProgress(false);
+        }
+    }
 
     private class UpdateUserTask extends AsyncTask<Void, Void, Void> {
         ParseObject _parseObject;

@@ -166,13 +166,3 @@
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
-
-
-    <!--&lt;!&ndash; TODO: MOVE FAV OVER TO LISTFRAGMENT&ndash;&gt;-->
-    <!--&lt;!&ndash;<android.support.design.widget.FloatingActionButton&ndash;&gt;-->
-    <!--&lt;!&ndash;android:id="@+id/fab"&ndash;&gt;-->
-    <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
-    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
-    <!--&lt;!&ndash;android:layout_gravity="bottom|end"&ndash;&gt;-->
-    <!--&lt;!&ndash;android:layout_margin="@dimen/fab_margin"&ndash;&gt;-->
-    <!--&lt;!&ndash;android:src="@android:drawable/ic_dialog_email"/>&ndash;&gt;-->

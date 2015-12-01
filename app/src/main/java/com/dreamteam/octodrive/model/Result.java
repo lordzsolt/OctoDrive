@@ -6,6 +6,7 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -62,5 +63,9 @@ public class Result extends OctoObject {
 
     public void setScore(int score) {
         _parseObject.put(WebserviceConstants.kPARSE_PROPERTY_QUESTION_CORRECT, score);
+    }
+
+    public Date date() {
+        return _parseObject.getCreatedAt();
     }
 }

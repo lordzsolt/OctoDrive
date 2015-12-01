@@ -27,6 +27,7 @@ import java.util.List;
 
 public class QuestionDetailsActivity extends AppCompatActivity {
 
+    private boolean _isNewQuestion;
     private Question _question;
 
     private LoadingView mLoadingView;
@@ -38,6 +39,12 @@ public class QuestionDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_question_details);
 
         Intent intent = getIntent();
+        _isNewQuestion = intent.getBooleanExtra(KeyConstants.kKEY_CONSTANT_ADMIN_NEW_QUESTION, true);
+
+        if (_isNewQuestion) {
+            return;
+        }
+
         _question = intent.getExtras().getParcelable(KeyConstants.kKEY_CONSTANT_ADMIN_EDIT_OBJECT);
 
         EditText messageEdit = (EditText)findViewById(R.id.question_edit_message);

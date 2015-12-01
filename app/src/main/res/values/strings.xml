@@ -59,5 +59,10 @@
     <string name="user_details_name">Name:</string>
     <string name="user_details_email">Email:</string>
     <string name="user_details_admin">Admin</string>
+    <string name="user_details_result_date"><b>Date</b></string>
+    <string name="user_details_result_score"><b>Score</b></string>
+    <string name="user_details_result_type"><b>Type</b></string>
+    <string name="result_type_practice">Practice</string>
+    <string name="result_type_live">Live</string>
 
 </resources>

@@ -53,10 +53,10 @@ public class AdminActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0: {
-                    return ListFragment.newInstance(Question.class);
+                    return ListFragment.newInstance(Question.class, true);
                 }
                 case 1: {
-                    return ListFragment.newInstance(User.class);
+                    return ListFragment.newInstance(User.class, false);
                 }
                 default: {
                     return SettingsFragment.newInstance();

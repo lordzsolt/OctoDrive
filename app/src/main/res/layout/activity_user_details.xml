@@ -11,12 +11,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.dreamteam.octodrive.activity.admin.UserDetailsActivity">
 
-    <ScrollView
-        android:id="@+id/view_user_details"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp">
-
         <LinearLayout
             android:id="@+id/email_login_form"
             android:layout_width="match_parent"
@@ -77,5 +71,10 @@
             </LinearLayout>
 
         </LinearLayout>
-    </ScrollView>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/results_list_view"
+        android:layout_gravity="center_horizontal"/>
 </LinearLayout>
