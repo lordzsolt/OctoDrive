@@ -2,9 +2,7 @@ package com.dreamteam.octodrive.model;
 
 import com.dreamteam.octodrive.interfaces.Listable;
 import com.dreamteam.octodrive.webservice.WebserviceConstants;
-import com.parse.Parse;
 import com.parse.ParseException;
-import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 

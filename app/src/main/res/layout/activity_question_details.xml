@@ -16,7 +16,6 @@
         android:layout_marginBottom="32dp">
 
         <LinearLayout
-            android:id="@+id/message_question_edit_form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -26,7 +25,7 @@
                 android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/message"
+                    android:id="@+id/question_edit_message"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/prompt_question_message"
@@ -40,7 +39,7 @@
                 android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/answer1"
+                    android:id="@+id/question_edit_answer1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/prompt_question_answer1"
@@ -54,7 +53,7 @@
                 android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/answer2"
+                    android:id="@+id/question_edit_answer2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/prompt_question_answer2"
@@ -68,7 +67,7 @@
                 android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/answer3"
+                    android:id="@+id/question_edit_answer3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/prompt_question_answer3"
@@ -88,29 +87,28 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="@string/question_edit_correct"
-                    android:id="@+id/textView3"/>
+                    android:text="@string/question_edit_correct"/>
 
                 <CheckBox
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:text="@string/prompt_question_answer1"
-                    android:id="@+id/checkBox"/>
+                    android:id="@+id/checkBox_correct_answer1"/>
 
                 <CheckBox
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:text="@string/prompt_question_answer2"
-                    android:id="@+id/checkBox2"/>
+                    android:id="@+id/checkBox_correct_answer2"/>
 
                 <CheckBox
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:text="@string/prompt_question_answer3"
-                    android:id="@+id/checkBox3"/>
+                    android:id="@+id/checkBox_correct_answer3"/>
             </LinearLayout>
 
             <LinearLayout

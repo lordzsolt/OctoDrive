@@ -9,9 +9,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.dreamteam.octodrive.R;
+import com.dreamteam.octodrive.constants.KeyConstants;
 import com.dreamteam.octodrive.interfaces.Listable;
 import com.dreamteam.octodrive.model.Question;
 import com.dreamteam.octodrive.model.User;
+import com.parse.ParseUser;
 
 import java.util.List;
 
@@ -45,9 +47,13 @@ public class ListItemViewAdapter extends RecyclerView.Adapter<ListItemViewAdapte
                 Intent intent = null;
                 if (item instanceof User) {
                     intent = new Intent(mContext, QuestionDetailsActivity.class);
+                    User user = (User)item;
+//                    intent.putExtra(KeyConstants.kKEY_CONSTANT_ADMIN_EDIT_OBJECT, user);
                 }
                 else if (item instanceof Question) {
                     intent = new Intent(mContext, QuestionDetailsActivity.class);
+                    Question question = (Question)item;
+                    intent.putExtra(KeyConstants.kKEY_CONSTANT_ADMIN_EDIT_OBJECT, question);
                 }
                 mContext.startActivity(intent);
             }

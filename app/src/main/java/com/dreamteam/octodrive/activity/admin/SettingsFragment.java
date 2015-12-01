@@ -1,8 +1,8 @@
 package com.dreamteam.octodrive.activity.admin;
-;
-import android.support.v4.app.Fragment;
+
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +14,8 @@ import android.widget.TextView;
 import com.dreamteam.octodrive.R;
 import com.dreamteam.octodrive.model.Settings;
 import com.dreamteam.octodrive.utilities.LoadingView;
+
+;
 
 public class SettingsFragment extends Fragment {
 
