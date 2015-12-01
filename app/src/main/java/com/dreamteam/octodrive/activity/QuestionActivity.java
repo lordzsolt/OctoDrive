@@ -4,9 +4,11 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -19,6 +21,7 @@ import com.dreamteam.octodrive.utilities.LoadingView;
 import com.parse.ParseException;
 
 import java.awt.font.TextAttribute;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -40,6 +43,8 @@ public class QuestionActivity extends AppCompatActivity {
     private int current;
     private List<Question> questions;
     private HashMap<String, List<Boolean>> answers;
+
+    private boolean processEvents = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,8 +73,28 @@ public class QuestionActivity extends AppCompatActivity {
         tvQuestion = (TextView)findViewById(R.id.textView_question);
 
         chkAns1 = (CheckBox)findViewById(R.id.checkBox_answer1);
+        chkAns1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                setAnswer(0, isChecked);
+            }
+        });
+
         chkAns2 = (CheckBox)findViewById(R.id.checkBox_answer2);
+        chkAns2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                setAnswer(1, isChecked);
+            }
+        });
+
         chkAns3 = (CheckBox)findViewById(R.id.checkBox_answer3);
+        chkAns3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                setAnswer(2, isChecked);
+            }
+        });
 
         btnPrev = (Button)findViewById(R.id.button_prev);
         btnPrev.setOnClickListener(new View.OnClickListener() {
@@ -88,6 +113,7 @@ public class QuestionActivity extends AppCompatActivity {
         });
 
         btnFinish = (Button)findViewById(R.id.button_finish);
+        btnFinish.setEnabled(false);
 
         mLoadingView = new LoadingView(this, getString(R.string.dialog_preparing));
         mLoadingView.showProgress(true);
@@ -114,6 +140,8 @@ public class QuestionActivity extends AppCompatActivity {
         chkAns2.setText(ans.get(1));
         chkAns3.setText(ans.get(2));
 
+        processEvents = false;
+
         if (answers.containsKey(q.objectId())) {
             List<Boolean> chk = answers.get(q.objectId());
             chkAns1.setChecked(chk.get(0));
@@ -125,6 +153,47 @@ public class QuestionActivity extends AppCompatActivity {
             chkAns2.setChecked(false);
             chkAns3.setChecked(false);
         }
+
+        processEvents = true;
+    }
+
+    private void setAnswer(int index, boolean value) {
+        if (!processEvents) {
+            return;
+        }
+
+        Question q = questions.get(current);
+
+        if (answers.containsKey(q.objectId())) {
+            List<Boolean> chk = answers.get(q.objectId());
+            chk.set(index, value);
+
+            boolean any = false;
+            for (int i = 0; i < 3; i++) {
+                if (chk.get(i)) {
+                    any = true;
+                    break;
+                }
+            }
+
+            if (any) {
+                answers.put(q.objectId(), chk);
+            }
+            else {
+                answers.remove(q.objectId());
+            }
+        }
+        else {
+            List<Boolean> chk = new ArrayList<>();
+
+            for (int i = 0; i < 3; i++) {
+                chk.add(i == index && value);
+            }
+
+            answers.put(q.objectId(), chk);
+        }
+
+        btnFinish.setEnabled(answers.size() == questions.size());
     }
 
     public class GetQuestionsTask extends AsyncTask<Void, Void, Boolean> {
