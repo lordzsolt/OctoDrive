@@ -3,10 +3,10 @@ package com.dreamteam.octodrive.activity.admin;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -16,7 +16,7 @@ import com.dreamteam.octodrive.model.User;
 import com.dreamteam.octodrive.webservice.ParseWebservice;
 import com.dreamteam.octodrive.webservice.WebserviceConstants;
 
-public class AdminActivity extends FragmentActivity {
+public class AdminActivity extends AppCompatActivity {
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
 
@@ -36,23 +36,6 @@ public class AdminActivity extends FragmentActivity {
         ParseWebservice.initialise(this, WebserviceConstants.kPARSE_APPLICATION_ID,
                                    WebserviceConstants.kPARSE_CLIENT_KEY);
 
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_admin, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
