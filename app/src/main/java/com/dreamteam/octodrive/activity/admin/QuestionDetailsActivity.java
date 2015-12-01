@@ -44,6 +44,7 @@ public class QuestionDetailsActivity extends AppCompatActivity {
         _isNewQuestion = intent.getBooleanExtra(KeyConstants.kKEY_CONSTANT_ADMIN_NEW_QUESTION, true);
 
         if (_isNewQuestion) {
+            _question = new Question();
             return;
         }
 
