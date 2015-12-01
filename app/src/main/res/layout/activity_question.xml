@@ -10,7 +10,7 @@
     android:id="@+id/relativelayout_question"
     tools:context="com.dreamteam.octodrive.activity.QuestionActivity">
 
-    <ImageView
+    <com.parse.ParseImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/imageView_question"

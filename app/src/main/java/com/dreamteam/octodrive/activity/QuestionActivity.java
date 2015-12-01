@@ -22,7 +22,10 @@ import com.dreamteam.octodrive.model.Result;
 import com.dreamteam.octodrive.model.Settings;
 import com.dreamteam.octodrive.model.User;
 import com.dreamteam.octodrive.utilities.LoadingView;
+import com.parse.GetDataCallback;
 import com.parse.ParseException;
+import com.parse.ParseFile;
+import com.parse.ParseImageView;
 
 import java.awt.font.TextAttribute;
 import java.util.ArrayList;
@@ -40,7 +43,7 @@ public class QuestionActivity extends AppCompatActivity {
     private boolean isPractice, isEvaluating;
 
     private RelativeLayout rlQuestion;
-    private ImageView ivQuestion;
+    private ParseImageView ivQuestion;
     private TextView tvQuestion;
     private CheckBox chkAns1, chkAns2, chkAns3;
     private Button btnPrev, btnNext, btnFinish;
@@ -74,7 +77,7 @@ public class QuestionActivity extends AppCompatActivity {
         rlQuestion = (RelativeLayout)findViewById(R.id.relativelayout_question);
         rlQuestion.setVisibility(View.INVISIBLE);
 
-        ivQuestion = (ImageView)findViewById(R.id.imageView_question);
+        ivQuestion = (ParseImageView)findViewById(R.id.imageView_question);
         tvQuestion = (TextView)findViewById(R.id.textView_question);
 
         chkAns1 = (CheckBox)findViewById(R.id.checkBox_answer1);
@@ -184,8 +187,20 @@ public class QuestionActivity extends AppCompatActivity {
         current = index;
         Question q = questions.get(index);
 
-        //ivQuestion.set?
+        ivQuestion.setVisibility(View.GONE);
         tvQuestion.setText(q.message());
+
+        ParseFile img = q.image();
+
+        if (img != null) {
+            ivQuestion.setParseFile(img);
+            ivQuestion.loadInBackground(new GetDataCallback() {
+                @Override
+                public void done(byte[] data, ParseException e) {
+                    ivQuestion.setVisibility(View.VISIBLE);
+                }
+            });
+        }
 
         List<String> ans = q.answers();
         chkAns1.setText(ans.get(0));
