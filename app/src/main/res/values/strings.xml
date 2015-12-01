@@ -44,4 +44,16 @@
     <string name="dialog_loading">Loading…</string>
     <string name="invalid_input">Invalid Input</string>
     <string name="title_activity_something">Something</string>
+    <string name="title_activity_question_details">QuestionDetailsActivity</string>
+
+    <!-- QuestionDetailsActivity -->
+    <string name="prompt_question_message">Question</string>
+    <string name="prompt_question_answer1">A</string>
+    <string name="prompt_question_answer2">B</string>
+    <string name="prompt_question_answer3">C</string>
+    <string name="question_edit_correct">Correct:</string>
+    <string name="question_edit_active">Active</string>
+    <string name="question_edit_language">Language:</string>
+    <string name="question_edit_image">Image:</string>
+
 </resources>

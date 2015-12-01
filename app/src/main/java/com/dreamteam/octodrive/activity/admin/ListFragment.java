@@ -6,9 +6,12 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import com.dreamteam.octodrive.R;
 import com.dreamteam.octodrive.interfaces.Listable;
@@ -65,7 +68,7 @@ public class ListFragment extends Fragment {
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            recyclerView.setAdapter(new ListItemViewAdapter(mValues));
+            recyclerView.setAdapter(new ListItemViewAdapter(context, mValues));
         }
     }
 

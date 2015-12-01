@@ -1,5 +1,7 @@
 package com.dreamteam.octodrive.activity.admin;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +10,7 @@ import android.widget.TextView;
 
 import com.dreamteam.octodrive.R;
 import com.dreamteam.octodrive.interfaces.Listable;
+import com.dreamteam.octodrive.model.Question;
 import com.dreamteam.octodrive.model.User;
 
 import java.util.List;
@@ -16,8 +19,11 @@ public class ListItemViewAdapter extends RecyclerView.Adapter<ListItemViewAdapte
 
     private final List<? extends Listable> mValues;
 
-    public ListItemViewAdapter(List<? extends Listable> items) {
+    Context mContext;
+
+    public ListItemViewAdapter(Context context, List<? extends Listable> items) {
         mValues = items;
+        mContext = context;
     }
 
     @Override
@@ -29,8 +35,23 @@ public class ListItemViewAdapter extends RecyclerView.Adapter<ListItemViewAdapte
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.mValue = mValues.get(position);
+        final Listable item = mValues.get(position);
+        holder.mValue = item;
         holder.mNameView.setText(holder.mValue.displayText());
+
+        holder.mView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = null;
+                if (item instanceof User) {
+                    intent = new Intent(mContext, QuestionDetailsActivity.class);
+                }
+                else if (item instanceof Question) {
+                    intent = new Intent(mContext, QuestionDetailsActivity.class);
+                }
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     @Override
