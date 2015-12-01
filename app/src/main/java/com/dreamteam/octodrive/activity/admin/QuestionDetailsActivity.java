@@ -1,6 +1,7 @@
 package com.dreamteam.octodrive.activity.admin;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.dreamteam.octodrive.R;
@@ -72,6 +74,12 @@ public class QuestionDetailsActivity extends AppCompatActivity {
 
         CheckBox checkBoxActive = (CheckBox)findViewById(R.id.activeCheckBox);
         checkBoxActive.setChecked(_question.active());
+
+        Spinner languageSpinner = (Spinner)findViewById(R.id.language_spinner);
+        Resources res = this.getResources();
+        String[] languages = res.getStringArray(R.array.languages);
+        int index = Arrays.asList(languages).indexOf(_question.language());
+        languageSpinner.setSelection(index);
     }
 
     @Override
