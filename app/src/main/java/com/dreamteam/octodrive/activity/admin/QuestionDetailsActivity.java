@@ -56,6 +56,7 @@ public class QuestionDetailsActivity extends AppCompatActivity {
         _isNewQuestion = intent.getBooleanExtra(KeyConstants.kKEY_CONSTANT_ADMIN_NEW_QUESTION, true);
 
         if (_isNewQuestion) {
+            _question = new Question();
             return;
         }
 
@@ -195,6 +196,10 @@ public class QuestionDetailsActivity extends AppCompatActivity {
         CheckBox checkBoxActive = (CheckBox)findViewById(R.id.activeCheckBox);
         boolean newState = checkBoxActive.isChecked();
         newQuestion.setActive(newState);
+
+        Spinner languageSpinner = (Spinner)findViewById(R.id.language_spinner);
+        String language = languageSpinner.getSelectedItem().toString();
+        newQuestion.setLanguage(language);
 
         mLoadingView = new LoadingView(this, getString(R.string.dialog_loading));
         mLoadingView.showProgress(true);
