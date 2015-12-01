@@ -99,6 +99,7 @@ public class UserDetailsActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void integer) {
             mLoadingView.showProgress(false);
+            UserDetailsActivity.this.finish();
         }
 
         @Override
