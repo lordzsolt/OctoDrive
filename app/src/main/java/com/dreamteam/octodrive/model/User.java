@@ -15,9 +15,20 @@ import java.util.List;
 /**
  * Created by Lordzsolt on 11/19/2015.
  */
-public class User implements Listable {
+public class User implements Listable, Parcelable {
 
     private ParseUser _parseUser;
+
+    public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>() {
+        public User createFromParcel(Parcel in) {
+            return new User(in);
+        }
+
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
 
     public static List<User> getAllUsers() throws ParseException {
         ParseQuery<ParseUser> query = ParseUser.getQuery();
@@ -43,6 +54,22 @@ public class User implements Listable {
 
     public User(ParseUser parseUser) {
         _parseUser = parseUser;
+    }
+
+    public User(Parcel in) {
+        this();
+
+        String objectId = in.readString();
+        _parseUser.setObjectId(objectId);
+
+        String name = in.readString();
+        this.setName(name);
+
+        String email = in.readString();
+        this.setEmail(email);
+
+        boolean admin = in.readByte() != 0;
+        this.setAdmin(admin);
     }
 
     @Override
@@ -101,5 +128,18 @@ public class User implements Listable {
 
     public void setAdmin(boolean admin) {
         _parseUser.put(WebserviceConstants.kPARSE_PROPERTY_USER_ADMIN, admin);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(objectId());
+        dest.writeString(name());
+        dest.writeString(email());
+        dest.writeByte((byte) (isAdmin() ? 1 : 0));
     }
 }
