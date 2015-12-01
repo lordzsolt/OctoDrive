@@ -277,7 +277,6 @@ public class QuestionActivity extends AppCompatActivity {
                 for (int j = 0; j < 3; j++) {
                     if (cor.get(j) != ans.get(j)) {
                         all = false;
-                        break;
                     }
                 }
 
