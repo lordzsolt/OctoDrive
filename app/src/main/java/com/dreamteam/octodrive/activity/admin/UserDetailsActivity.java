@@ -1,22 +1,30 @@
 package com.dreamteam.octodrive.activity.admin;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.CheckBox;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.dreamteam.octodrive.R;
 import com.dreamteam.octodrive.constants.KeyConstants;
 import com.dreamteam.octodrive.model.User;
+import com.dreamteam.octodrive.utilities.LoadingView;
+import com.dreamteam.octodrive.webservice.WebserviceConstants;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseUser;
 
 public class UserDetailsActivity extends AppCompatActivity {
 
     private User _user;
+
+    private LoadingView mLoadingView;
+    private UpdateUserTask mUpdateUserTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,9 +55,7 @@ public class UserDetailsActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_save:
-                // TODO save here, this handy toast will also let you know:
-                Toast.makeText(UserDetailsActivity.this,
-                               "n-ai scris codul pentru salvare, bă prostule", Toast.LENGTH_SHORT).show();
+                updateUser();
                 break;
 
             default:
@@ -57,5 +63,47 @@ public class UserDetailsActivity extends AppCompatActivity {
         }
 
         return true;
+    }
+
+    void updateUser() {
+        CheckBox checkBoxActive = (CheckBox)findViewById(R.id.checkbox_admin);
+        boolean newState = checkBoxActive.isChecked();
+        if (newState != _user.isAdmin()) {
+            mLoadingView = new LoadingView(this, getString(R.string.dialog_loading));
+            mLoadingView.showProgress(true);
+            ParseObject user = ParseUser.createWithoutData(WebserviceConstants.kPARSE_OBJECT_USER, _user.objectId());
+            user.put(WebserviceConstants.kPARSE_PROPERTY_USER_ADMIN, newState);
+
+            mUpdateUserTask = new UpdateUserTask();
+            mUpdateUserTask._parseObject = user;
+            mUpdateUserTask.execute();
+        }
+    }
+
+
+    private class UpdateUserTask extends AsyncTask<Void, Void, Void> {
+        ParseObject _parseObject;
+        UpdateUserTask() {}
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            try {
+                _parseObject.save();
+            }
+            catch (ParseException e) {
+                //TODO: Do something
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void integer) {
+            mLoadingView.showProgress(false);
+        }
+
+        @Override
+        protected void onCancelled() {
+            mLoadingView.showProgress(false);
+        }
     }
 }
