@@ -1,6 +1,7 @@
 package com.dreamteam.octodrive.activity.admin;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -9,8 +10,11 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.dreamteam.octodrive.R;
+import com.dreamteam.octodrive.activity.LoginActivity;
+import com.dreamteam.octodrive.activity.QuestionActivity;
 import com.dreamteam.octodrive.model.Question;
 import com.dreamteam.octodrive.model.User;
 import com.dreamteam.octodrive.webservice.ParseWebservice;
@@ -22,10 +26,24 @@ public class AdminActivity extends AppCompatActivity {
 
     private ViewPager mViewPager;
 
+    private String userId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
+
+        Bundle bundle = this.getIntent().getExtras();
+        if (bundle != null && bundle.containsKey("userId")) {
+            userId = bundle.getString("userId");
+        }
+
+        if (userId == null || userId.isEmpty()) {
+            Toast.makeText(AdminActivity.this, R.string.error_invalid_intent, Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(AdminActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
 
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 

@@ -29,6 +29,8 @@ import android.widget.TextView;
 import com.dreamteam.octodrive.R;
 import com.dreamteam.octodrive.model.User;
 import com.dreamteam.octodrive.utilities.LoadingView;
+import com.dreamteam.octodrive.webservice.ParseWebservice;
+import com.dreamteam.octodrive.webservice.WebserviceConstants;
 import com.parse.ParseException;
 
 import java.util.ArrayList;
@@ -45,10 +47,16 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private EditText mPasswordView;
     private LoadingView mLoadingView;
 
+    private String userId;
+    private boolean userIsAdmin;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        ParseWebservice.initialise(this, WebserviceConstants.kPARSE_APPLICATION_ID,
+                WebserviceConstants.kPARSE_CLIENT_KEY);
 
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
@@ -223,28 +231,16 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            // TODO login
-
             try {
-                User.login(mEmail, mPassword);
+                User user = User.login(mEmail, mPassword);
+                userId = user.objectId();
+                userIsAdmin = user.isAdmin();
             }
             catch (ParseException e) {
-                //TODO: Do something with exception
                 return false;
             }
 
-            String[] DUMMY_CREDENTIALS = new String[]{
-                    "foo@example.com:hello", "bar@example.com:world"
-            };
-
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mEmail)) {
-                    return pieces[1].equals(mPassword);
-                }
-            }
-
-            return false;
+            return true;
         }
 
         @Override
@@ -254,6 +250,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
             if (success) {
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                intent.putExtra("userId", userId);
+                intent.putExtra("userIsAdmin", userIsAdmin);
                 startActivity(intent);
                 finish();
             }

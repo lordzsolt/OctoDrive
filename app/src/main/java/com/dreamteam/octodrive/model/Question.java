@@ -125,12 +125,10 @@ public class Question extends OctoObject implements Listable, Parcelable {
         int correct = _parseObject.getInt(WebserviceConstants.kPARSE_PROPERTY_QUESTION_CORRECT);
 
         List<Boolean> correctAnswers = new ArrayList<>();
-        int mask = 1;
-        for (int index = 0; index < 3; index++) {
-            int value = correct & mask;
-            correctAnswers.add(value != 0);
-            mask *= 2;
-        }
+
+        correctAnswers.add((correct & 1) == 1);
+        correctAnswers.add((correct & 2) == 2);
+        correctAnswers.add((correct & 4) == 4);
 
         return correctAnswers;
     }

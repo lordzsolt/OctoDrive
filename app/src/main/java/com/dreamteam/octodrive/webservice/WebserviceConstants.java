@@ -15,6 +15,7 @@ public class WebserviceConstants {
     public final static String kPARSE_PROPERTY_SETTINGS_KEY = "key";
     public final static String kPARSE_PROPERTY_SETTINGS_VALUE = "value";
     public final static String kPARSE_KEY_SETTINGS_QUESTION_COUNT = "questionCount";
+    public final static String kPARSE_KEY_SETTINGS_MINIMUM_PASS = "minimumPass";
 
     public final static String kPARSE_OBJECT_QUESTION = "Question";
     public final static String kPARSE_PROPERTY_QUESTION_MESSAGE = "message";

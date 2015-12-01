@@ -7,18 +7,17 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
-/**
- * Created by Lord Zsolt on 11/22/2015.
- */
 public class Settings {
 
     private static final String LogTag = "SETTINGS";
     private static final int kDEFAULT_VALUE = -1;
 
-    private static int _questionCount = kDEFAULT_VALUE;
+    private static int _questionCount = kDEFAULT_VALUE,
+                       _minimumPass   = kDEFAULT_VALUE;
 
     public static void invalidate() {
         _questionCount = kDEFAULT_VALUE;
+        _minimumPass   = kDEFAULT_VALUE;
     }
 
     public static int questionCount() {
@@ -37,6 +36,24 @@ public class Settings {
 
     public static void setQuestionCount(int questionCount) {
         setSettingsValueForKey(WebserviceConstants.kPARSE_KEY_SETTINGS_QUESTION_COUNT, String.valueOf(questionCount));
+    }
+
+    public static int minimumPass() {
+        if (_minimumPass != kDEFAULT_VALUE) {
+            return _minimumPass;
+        }
+        int result = 0;
+
+        String valueString = getSettingsValueForKey(WebserviceConstants.kPARSE_KEY_SETTINGS_MINIMUM_PASS);
+        if (valueString != null) {
+            result = Integer.parseInt(valueString);
+        }
+
+        return result;
+    }
+
+    public static void setMinimumPass(int minimumPass) {
+        setSettingsValueForKey(WebserviceConstants.kPARSE_KEY_SETTINGS_MINIMUM_PASS, String.valueOf(minimumPass));
     }
 
     private static String getSettingsValueForKey(String key) {

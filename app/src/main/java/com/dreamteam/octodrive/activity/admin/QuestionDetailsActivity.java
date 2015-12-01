@@ -149,6 +149,7 @@ public class QuestionDetailsActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void integer) {
             mLoadingView.showProgress(false);
+            QuestionDetailsActivity.this.finish();
         }
 
         @Override

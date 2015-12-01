@@ -30,6 +30,8 @@ import android.widget.Toast;
 import com.dreamteam.octodrive.R;
 import com.dreamteam.octodrive.model.User;
 import com.dreamteam.octodrive.utilities.LoadingView;
+import com.dreamteam.octodrive.webservice.ParseWebservice;
+import com.dreamteam.octodrive.webservice.WebserviceConstants;
 import com.parse.ParseException;
 
 import java.util.ArrayList;
@@ -46,6 +48,8 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
     private LoadingView mLoadingView;
+
+    private String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -245,9 +249,9 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
 
             try {
                 user.save();
+                userId = user.objectId();
             }
             catch (ParseException e) {
-                //TODO: Do something with the exception
                 return false;
             }
 
@@ -261,6 +265,7 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
 
             if (success) {
                 Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                intent.putExtra("userId", userId);
                 startActivity(intent);
                 finish();
             }
