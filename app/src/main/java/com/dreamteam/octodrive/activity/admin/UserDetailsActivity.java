@@ -28,7 +28,8 @@ public class UserDetailsActivity extends AppCompatActivity {
     private User _user;
 
     private LoadingView mLoadingView;
-    private UpdateUserTask mUpdateUserTask;
+
+    private ListView mListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,15 @@ public class UserDetailsActivity extends AppCompatActivity {
 
         CheckBox checkBoxActive = (CheckBox)findViewById(R.id.checkbox_admin);
         checkBoxActive.setChecked(_user.isAdmin());
+
+        mLoadingView = new LoadingView(this, getString(R.string.dialog_loading));
+        mLoadingView.showProgress(true);
+
+        mListView = (ListView)findViewById(R.id.results_list_view);
+
+        GetResultsTask mGetResultsTask = new GetResultsTask();
+        mGetResultsTask.objectId = _user.objectId();
+        mGetResultsTask.execute();
     }
 
     @Override
@@ -73,35 +83,36 @@ public class UserDetailsActivity extends AppCompatActivity {
         CheckBox checkBoxActive = (CheckBox)findViewById(R.id.checkbox_admin);
         boolean newState = checkBoxActive.isChecked();
         if (newState != _user.isAdmin()) {
-            mLoadingView = new LoadingView(this, getString(R.string.dialog_loading));
             mLoadingView.showProgress(true);
             ParseObject user = ParseUser.createWithoutData(WebserviceConstants.kPARSE_OBJECT_USER, _user.objectId());
             user.put(WebserviceConstants.kPARSE_PROPERTY_USER_ADMIN, newState);
 
-            mUpdateUserTask = new UpdateUserTask();
+            UpdateUserTask mUpdateUserTask = new UpdateUserTask();
             mUpdateUserTask._parseObject = user;
             mUpdateUserTask.execute();
         }
     }
 
     private class GetResultsTask extends AsyncTask<Void, Void, List<Result>> {
-        ParseUser _parseUser;
+        String objectId;
         GetResultsTask() {}
 
         @Override
         protected List<Result> doInBackground(Void... params) {
-//            try {
-//                _parseObject.save();
-//            }
-//            catch (ParseException e) {
-//                //TODO: Do something
-//            }
-            return null;
+            try {
+                return Result.resultsForUser(objectId);
+            }
+            catch (Exception e) {
+                return null;
+            }
         }
 
         @Override
         protected void onPostExecute(List<Result> results) {
             mLoadingView.showProgress(false);
+            if (results != null) {
+                mListView.setAdapter(new ResultsViewAdapter(UserDetailsActivity.this, results));
+            }
         }
 
         @Override
