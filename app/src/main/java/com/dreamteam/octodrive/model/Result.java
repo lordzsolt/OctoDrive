@@ -4,6 +4,7 @@ import com.dreamteam.octodrive.webservice.WebserviceConstants;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseRelation;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -37,7 +38,9 @@ public class Result extends OctoObject {
     public Result(String objectId) {
         _parseObject = new ParseObject(WebserviceConstants.kPARSE_OBJECT_RESULT);
         ParseObject user = ParseObject.createWithoutData(WebserviceConstants.kPARSE_OBJECT_USER, objectId);
-        _parseObject.put(WebserviceConstants.kPARSE_PROPERY_RESULT_USER, user);
+        ParseRelation relation = _parseObject.getRelation(WebserviceConstants.kPARSE_PROPERY_RESULT_USER);
+        relation.add(user);
+        _parseObject.put(WebserviceConstants.kPARSE_PROPERY_RESULT_USER, relation);
     }
 
     public Result(ParseObject parseObject) {
@@ -64,7 +67,7 @@ public class Result extends OctoObject {
     }
 
     public void setScore(int score) {
-        _parseObject.put(WebserviceConstants.kPARSE_PROPERTY_QUESTION_CORRECT, score);
+        _parseObject.put(WebserviceConstants.kPARSE_PROPERY_RESULT_SCORE, score);
     }
 
     public Date date() {
