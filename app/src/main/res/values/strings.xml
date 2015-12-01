@@ -63,6 +63,7 @@
     <string name="question_edit_language">Language:</string>
     <string name="question_edit_image">Image:</string>
     <string name="action_save">Save</string>
+    <string name="dialog_uploading">Uploading…</string>
 
     <!-- UserDetailsActivity -->
     <string name="user_details_name">Name:</string>

@@ -2,6 +2,9 @@ package com.dreamteam.octodrive.activity.admin;
 
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,8 +12,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -20,9 +26,13 @@ import com.dreamteam.octodrive.model.Question;
 import com.dreamteam.octodrive.utilities.LoadingView;
 import com.dreamteam.octodrive.webservice.WebserviceConstants;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -34,6 +44,8 @@ public class QuestionDetailsActivity extends AppCompatActivity {
 
     private LoadingView mLoadingView;
     private UpdateTask mUpdateUserTask;
+
+    private ParseFile parseImage = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +92,56 @@ public class QuestionDetailsActivity extends AppCompatActivity {
         String[] languages = res.getStringArray(R.array.languages);
         int index = Arrays.asList(languages).indexOf(_question.language());
         languageSpinner.setSelection(index);
+
+        ImageButton imageBtn = (ImageButton)findViewById(R.id.imageButton);
+        imageBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+                intent.setType("image/*");
+                intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
+                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                //startActivityForResult(intent, 100);
+                startActivityForResult(Intent.createChooser(intent, ""), 100);
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent imageReturnedIntent) {
+        super.onActivityResult(requestCode, resultCode, imageReturnedIntent);
+
+        if (resultCode != RESULT_OK) {
+            return;
+        }
+
+        switch(requestCode) {
+            case 100:
+                try {
+                    mLoadingView = new LoadingView(this, getString(R.string.dialog_uploading));
+                    mLoadingView.showProgress(true);
+
+                    InputStream imageStream = getContentResolver().openInputStream(imageReturnedIntent.getData());
+                    Bitmap bitmap = BitmapFactory.decodeStream(imageStream);
+
+                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                    byte[] image = stream.toByteArray();
+
+                    final ParseFile file = new ParseFile(_question.objectId() + ".jpg", image);
+                    file.saveInBackground(new SaveCallback() {
+                        public void done(ParseException e) {
+                            parseImage = file;
+                            mLoadingView.showProgress(false);
+                        }
+                    });
+                }
+                catch (Exception ex) {
+                    Log.d("img", ex.toString());
+                    mLoadingView.showProgress(false);
+                }
+                break;
+        }
     }
 
     @Override
@@ -105,6 +167,10 @@ public class QuestionDetailsActivity extends AppCompatActivity {
 
     void updateQuestion() {
         Question newQuestion = Question.newQuestionWithObjectId(_question.objectId());
+
+        if (parseImage != null) {
+            newQuestion.setImage(parseImage);
+        }
 
         EditText messageEdit = (EditText)findViewById(R.id.question_edit_message);
         String newMessage = messageEdit.getText().toString();
