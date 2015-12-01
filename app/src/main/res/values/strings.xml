@@ -49,9 +49,11 @@
     <!-- SettingsFragment -->
     <string name="title_activity_question_details">Question Management</string>
     <string name="text_question_count">Questions per test</string>
+    <string name="text_minimum_pass">Questions required to pass</string>
     <string name="dialog_loading">Loading…</string>
     <string name="invalid_input">Invalid input.</string>
     <string name="action_settings">Settings</string>
+    <string name="button_save">Save</string>
 
     <!-- QuestionDetailsActivity -->
     <string name="prompt_question_message">Question</string>
