@@ -14,9 +14,10 @@ import java.util.List;
  */
 public class Result extends OctoObject {
 
-    public static List<Result> resultsForUser(User user) {
+    public static List<Result> resultsForUser(String objectId) {
         ParseQuery<ParseObject> query = new ParseQuery<>(WebserviceConstants.kPARSE_OBJECT_RESULT);
-        query.whereEqualTo(WebserviceConstants.kPARSE_PROPERY_RESULT_USER, user.parseUser());
+        ParseObject user = ParseObject.createWithoutData(WebserviceConstants.kPARSE_OBJECT_USER, objectId);
+        query.whereEqualTo(WebserviceConstants.kPARSE_PROPERY_RESULT_USER, user);
         List<Result> array = new ArrayList<>();
         List<ParseObject> results;
         try {
@@ -33,9 +34,10 @@ public class Result extends OctoObject {
         return array;
     }
 
-    public Result(User user) {
+    public Result(String objectId) {
         _parseObject = new ParseObject(WebserviceConstants.kPARSE_OBJECT_RESULT);
-        _parseObject.put(WebserviceConstants.kPARSE_PROPERY_RESULT_USER, user.parseUser());
+        ParseObject user = ParseObject.createWithoutData(WebserviceConstants.kPARSE_OBJECT_USER, objectId);
+        _parseObject.put(WebserviceConstants.kPARSE_PROPERY_RESULT_USER, user);
     }
 
     public Result(ParseObject parseObject) {
