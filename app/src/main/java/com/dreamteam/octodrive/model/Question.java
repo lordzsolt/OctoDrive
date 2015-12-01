@@ -59,6 +59,11 @@ public class Question extends OctoObject implements Listable, Parcelable {
         return getQuestions(0, null, false);
     }
 
+    public static Question newQuestionWithObjectId(String objectId) {
+        ParseObject object = ParseObject.createWithoutData(WebserviceConstants.kPARSE_OBJECT_QUESTION, objectId);
+        return new Question(object);
+    }
+
     public Question() {
         _parseObject = new ParseObject(WebserviceConstants.kPARSE_OBJECT_QUESTION);
     }
