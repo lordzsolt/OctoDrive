@@ -130,6 +130,10 @@ public class QuestionDetailsActivity extends AppCompatActivity {
         boolean newState = checkBoxActive.isChecked();
         newQuestion.setActive(newState);
 
+        Spinner languageSpinner = (Spinner)findViewById(R.id.language_spinner);
+        String language = languageSpinner.getSelectedItem().toString();
+        newQuestion.setLanguage(language);
+
         mLoadingView = new LoadingView(this, getString(R.string.dialog_loading));
         mLoadingView.showProgress(true);
 
