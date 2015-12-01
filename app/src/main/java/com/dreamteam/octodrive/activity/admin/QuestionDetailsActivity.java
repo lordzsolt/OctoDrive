@@ -4,8 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.dreamteam.octodrive.R;
 import com.dreamteam.octodrive.constants.KeyConstants;
@@ -50,18 +54,28 @@ public class QuestionDetailsActivity extends AppCompatActivity {
 
         CheckBox checkBoxActive = (CheckBox)findViewById(R.id.activeCheckBox);
         checkBoxActive.setChecked(_question.active());
+    }
 
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_question_details, menu);
+        return true;
+    }
 
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_save:
+                // TODO save here, this handy toast will also let you know:
+                Toast.makeText(QuestionDetailsActivity.this, "n-ai scris codul pentru salvare, bă prostule", Toast.LENGTH_SHORT).show();
+                break;
+
+            default:
+                break;
+        }
+
+        return true;
     }
 
 }

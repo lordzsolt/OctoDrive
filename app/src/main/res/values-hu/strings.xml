@@ -40,4 +40,5 @@
     <string name="title_activity_admin">Adminisztráció</string>
     <string name="title_activity_question_details">Kérdés Szerkesztés</string>
     <string name="text_question_count">Kérdés per teszt</string>
+    <string name="action_save">Mentés</string>
 </resources>

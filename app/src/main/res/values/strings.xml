@@ -53,5 +53,6 @@
     <string name="question_edit_active">Active</string>
     <string name="question_edit_language">Language:</string>
     <string name="question_edit_image">Image:</string>
+    <string name="action_save">Save</string>
 
 </resources>
