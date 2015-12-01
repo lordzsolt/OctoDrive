@@ -1,6 +1,7 @@
 package com.dreamteam.octodrive.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -35,7 +36,7 @@ public class QuestionActivity extends AppCompatActivity {
     private LoadingView mLoadingView;
 
     private String userId;
-    private boolean isPractice;
+    private boolean isPractice, isEvaluating;
 
     private RelativeLayout rlQuestion;
     private ImageView ivQuestion;
@@ -111,12 +112,22 @@ public class QuestionActivity extends AppCompatActivity {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setQuestion(current + 1);
+                if (isPractice) {
+                    if (isEvaluating || (!chkAns1.isChecked() && !chkAns2.isChecked() && !chkAns3.isChecked())) {
+                        setQuestion(current + 1);
+                    }
+                    else {
+                        checkAnswer();
+                    }
+                }
+                else {
+                    setQuestion(current + 1);
+                }
             }
         });
 
         btnFinish = (Button)findViewById(R.id.button_finish);
-        btnFinish.setEnabled(false);
+        btnFinish.setEnabled(isPractice);
         btnFinish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -130,12 +141,43 @@ public class QuestionActivity extends AppCompatActivity {
         mQuestionsTask.execute((Void) null);
     }
 
+    private void checkAnswer() {
+        if (!isPractice) {
+            return;
+        }
+
+        isEvaluating = true;
+
+        Question q = questions.get(current);
+        List<Boolean> cor = q.correctAnswers();
+
+        chkAns1.setTextColor(cor.get(0) ? Color.GREEN : Color.RED);
+        chkAns2.setTextColor(cor.get(1) ? Color.GREEN : Color.RED);
+        chkAns3.setTextColor(cor.get(2) ? Color.GREEN : Color.RED);
+
+        chkAns1.setEnabled(false);
+        chkAns2.setEnabled(false);
+        chkAns3.setEnabled(false);
+    }
+
     private void setQuestion(int index) {
         if (index >= questions.size()) {
             index = 0;
         }
         else if (index < 0) {
             index = questions.size() - 1;
+        }
+
+        if (isPractice) {
+            isEvaluating = false;
+
+            chkAns1.setTextColor(Color.BLACK);
+            chkAns2.setTextColor(Color.BLACK);
+            chkAns3.setTextColor(Color.BLACK);
+
+            chkAns1.setEnabled(true);
+            chkAns2.setEnabled(true);
+            chkAns3.setEnabled(true);
         }
 
         current = index;
@@ -202,10 +244,17 @@ public class QuestionActivity extends AppCompatActivity {
             answers.put(q.objectId(), chk);
         }
 
-        btnFinish.setEnabled(answers.size() == questions.size());
+        if (!isPractice) {
+            btnFinish.setEnabled(answers.size() == questions.size());
+        }
     }
 
     private void finishTest() {
+        if (isPractice) {
+            QuestionActivity.this.finish();
+            return;
+        }
+
         if (questions.size() != answers.size()) {
             return;
         }
@@ -221,7 +270,12 @@ public class QuestionActivity extends AppCompatActivity {
         @Override
         protected Boolean doInBackground(Void... params) {
             try {
-                questions = Question.getPredefinedNumberOfQuestions(Locale.getDefault().getLanguage());
+                if (isPractice) {
+                    questions = Question.getQuestions(100, Locale.getDefault().getLanguage(), true);
+                }
+                else {
+                    questions = Question.getPredefinedNumberOfQuestions(Locale.getDefault().getLanguage());
+                }
 
                 if (questions.size() < 1) {
                     return false;
