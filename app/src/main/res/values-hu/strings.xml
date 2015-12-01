@@ -38,6 +38,6 @@
     <string name="question_edit_image">Kép:</string>
     <string name="question_edit_language">Nyelv:</string>
     <string name="title_activity_admin">Adminisztráció</string>
-    <string name="title_activity_question_details">Kérdés</string>
+    <string name="title_activity_question_details">Kérdés Szerkesztés</string>
     <string name="text_question_count">Kérdés per teszt</string>
 </resources>

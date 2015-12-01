@@ -30,19 +30,19 @@
     <string name="text_failed">You failed.</string>
     <string name="text_passed">You passed.</string>
     <string name="text_correct_ans">Correctly answered:</string>
-    <string name="title_activity_admin">Administration</string>
     <string name="action_settings">Settings</string>
 
     <!-- AdminActivity -->
+    <string name="title_activity_admin">Administration</string>
     <string name="admin_page_title_users">USERS</string>
     <string name="admin_page_title_questions">QUESTIONS</string>
     <string name="admin_page_title_settings">SETTINGS</string>
 
     <!-- SettingsFragment -->
+    <string name="title_activity_question_details">Question Management</string>
     <string name="text_question_count">Questions per test</string>
     <string name="dialog_loading">Loading…</string>
     <string name="invalid_input">Invalid input.</string>
-    <string name="title_activity_question_details">Question</string>
 
     <!-- QuestionDetailsActivity -->
     <string name="prompt_question_message">Question</string>
