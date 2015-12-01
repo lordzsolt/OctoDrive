@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.dreamteam.octodrive.R;
 import com.dreamteam.octodrive.activity.admin.AdminActivity;
 import com.dreamteam.octodrive.model.Question;
+import com.dreamteam.octodrive.model.Result;
 import com.dreamteam.octodrive.model.Settings;
 import com.dreamteam.octodrive.model.User;
 import com.dreamteam.octodrive.utilities.LoadingView;
@@ -347,7 +348,16 @@ public class QuestionActivity extends AppCompatActivity {
 
             passed = correct >= min;
 
-            // TODO write results to db
+            Result res = new Result(userId);
+            res.setLive(true);
+            res.setScore(correct);
+
+            try {
+                res.save();
+            }
+            catch (Exception ex) {
+                return false;
+            }
 
             return true;
         }
