@@ -102,7 +102,7 @@ public class SettingsFragment extends Fragment {
         mLoadingView.showProgress(true);
         mQuestionCount = inputValueQC;
         mMinimumPass = inputValueMP;
-        SaveTask saveTask = new SaveTask(inputValueMP, inputValueQC);
+        SaveTask saveTask = new SaveTask(inputValueQC, inputValueMP);
         saveTask.execute();
     }
 

@@ -12,6 +12,7 @@ import com.parse.ParseQuery;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Question extends OctoObject implements Listable, Parcelable {
 
@@ -28,7 +29,31 @@ public class Question extends OctoObject implements Listable, Parcelable {
 
     public static List<Question> getPredefinedNumberOfQuestions(String language) throws ParseException {
         int predefinedCount = Settings.questionCount();
-        return getQuestions(predefinedCount, language, true);
+
+        int totalNumberOfQuestions = numberOfActiveQuestionsWithLanguage(language);
+        if (predefinedCount >= totalNumberOfQuestions) {
+            return getQuestions(totalNumberOfQuestions, language, true);
+        }
+
+        List<Question> questions = new ArrayList<>(predefinedCount);
+        List<String> objectIds = new ArrayList<>(predefinedCount);
+        Random rand = new Random();
+        for (int i = 0 ; i < predefinedCount ; i++) {
+            ParseQuery query = new ParseQuery(WebserviceConstants.kPARSE_OBJECT_QUESTION);
+            query.setLimit(1);
+            query.whereEqualTo(WebserviceConstants.kPARSE_PROPERTY_QUESTION_ACTIVE, true);
+            query.whereEqualTo(WebserviceConstants.kPARSE_PROPERTY_QUESTION_LANGUAGE, language);
+            query.whereNotContainedIn(WebserviceConstants.kPARSE_PROPERTY_OBJECT_ID, objectIds);
+            int numberToSkip = rand.nextInt(totalNumberOfQuestions - questions.size());
+            query.setSkip(numberToSkip);
+
+            List<ParseObject> list = query.find();
+            ParseObject object = list.get(0);
+            Question question = new Question(object);
+            questions.add(question);
+            objectIds.add(question.objectId());
+        }
+        return questions;
     }
 
     public static List<Question> getQuestions(int count, String language, boolean onlyActive) throws ParseException {
@@ -45,7 +70,7 @@ public class Question extends OctoObject implements Listable, Parcelable {
         }
         List<ParseObject> questions = query.find();
 
-        List<Question> array = new ArrayList<>();
+        List<Question> array = new ArrayList<>(count);
         for (ParseObject object : questions) {
             Question question = new Question(object);
             array.add(question);
@@ -183,6 +208,17 @@ public class Question extends OctoObject implements Listable, Parcelable {
         _parseObject.put(WebserviceConstants.kPARSE_PROPERTY_QUESTION_LANGUAGE, language);
     }
 
+    private static int numberOfActiveQuestionsWithLanguage(String language) {
+        ParseQuery query = new ParseQuery(WebserviceConstants.kPARSE_OBJECT_QUESTION);
+        query.whereEqualTo(WebserviceConstants.kPARSE_PROPERTY_QUESTION_LANGUAGE, language);
+        try {
+            return query.count();
+        }
+        catch (ParseException e) {
+            return 0;
+        }
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -198,4 +234,5 @@ public class Question extends OctoObject implements Listable, Parcelable {
         dest.writeByte((byte) (active() ? 1 : 0));
         dest.writeString(imageUrl());
     }
+
 }
