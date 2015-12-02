@@ -48,7 +48,7 @@ public class QuestionActivity extends AppCompatActivity {
     private CheckBox chkAns1, chkAns2, chkAns3;
     private Button btnPrev, btnNext, btnFinish;
 
-    private int current;
+    private int current = -1;
     private List<Question> questions;
     private HashMap<String, List<Boolean>> answers;
 
@@ -165,11 +165,28 @@ public class QuestionActivity extends AppCompatActivity {
     }
 
     private void setQuestion(int index) {
+        if (!isPractice && current != -1 && !chkAns1.isChecked() && !chkAns2.isChecked() && !chkAns3.isChecked()) {
+            Toast.makeText(QuestionActivity.this, R.string.error_need_one, Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         if (index >= questions.size()) {
-            index = 0;
+            if (isPractice) {
+                index = 0;
+            }
+            else {
+                Toast.makeText(QuestionActivity.this, R.string.error_last_question, Toast.LENGTH_SHORT).show();
+                return;
+            }
         }
         else if (index < 0) {
-            index = questions.size() - 1;
+            if (isPractice) {
+                index = questions.size() - 1;
+            }
+            else {
+                Toast.makeText(QuestionActivity.this, R.string.error_first_question, Toast.LENGTH_SHORT).show();
+                return;
+            }
         }
 
         if (isPractice) {
@@ -182,6 +199,10 @@ public class QuestionActivity extends AppCompatActivity {
             chkAns1.setEnabled(true);
             chkAns2.setEnabled(true);
             chkAns3.setEnabled(true);
+        }
+        else {
+            btnNext.setEnabled(!(index >= questions.size() - 1));
+            btnPrev.setEnabled(!(index <= 0));
         }
 
         current = index;

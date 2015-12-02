@@ -34,6 +34,9 @@
     <string name="action_finish">Finish</string>
     <string name="error_fetch_question">Failed to get questions.</string>
     <string name="error_db_comm">Failed to communicate with database.</string>
+    <string name="error_last_question">This is the last question.</string>
+    <string name="error_first_question">This is the first question.</string>
+    <string name="error_need_one">You need to select at least one answer.</string>
 
     <!-- FinishActivity -->
     <string name="text_failed">You failed.</string>

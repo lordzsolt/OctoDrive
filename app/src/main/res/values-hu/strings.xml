@@ -58,4 +58,7 @@
     <string name="user_details_result_score"><b>Pontok</b></string>
     <string name="text_minimum_pass">Minimális átmenő kérdések száma</string>
     <string name="action_new">Létrehozás</string>
+    <string name="error_first_question">Ez az első kérdés.</string>
+    <string name="error_last_question">Ez az utolsó kérdés.</string>
+    <string name="error_need_one">Ki kell választanod legalább egy választ.</string>
 </resources>
