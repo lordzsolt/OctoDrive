@@ -36,7 +36,6 @@ public class ResultsViewAdapter extends ArrayAdapter<Result> {
 
         TextView tvDate = (TextView)rowView.findViewById(R.id.textView_date);
         TextView tvScore = (TextView)rowView.findViewById(R.id.textView_score);
-        TextView tvType = (TextView)rowView.findViewById(R.id.textView_type);
 
         Result result = objects.get(position);
         Date resultDate = result.date();
@@ -45,13 +44,6 @@ public class ResultsViewAdapter extends ArrayAdapter<Result> {
 
         tvScore.setText(Integer.toString(result.score()));
 
-        if (result.isLive()) {
-            tvType.setText(context.getString(R.string.result_type_live));
-        }
-        else {
-            tvDate.setText(context.getString(R.string.result_type_practice));
-        }
-        
         return rowView;
     }
 }

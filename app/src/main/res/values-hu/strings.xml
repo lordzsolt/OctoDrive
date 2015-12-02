@@ -54,10 +54,7 @@
     <string name="dialog_uploading">Feltöltés…</string>
     <string name="button_save">Mentés</string>
     <string name="question_edit_change">Változtatás…</string>
-    <string name="result_type_live">Élő</string>
-    <string name="result_type_practice">Gyakorlás</string>
     <string name="user_details_result_date"><b>Dátum</b></string>
     <string name="user_details_result_score"><b>Pontok</b></string>
-    <string name="user_details_result_type"><b>Típus</b></string>
     <string name="text_minimum_pass">Minimális átmenő kérdések száma</string>
 </resources>
