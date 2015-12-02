@@ -10,9 +10,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by Lord Zsolt on 11/26/2015.
- */
 public class Result extends OctoObject {
 
     public static List<Result> resultsForUser(String objectId) {

@@ -12,9 +12,6 @@ import com.parse.ParseUser;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Lordzsolt on 11/19/2015.
- */
 public class User implements Listable, Parcelable {
 
     private String _objectId;

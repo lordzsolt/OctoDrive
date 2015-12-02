@@ -18,9 +18,6 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by Lordzsolt on 12/1/2015.
- */
 public class ResultsViewAdapter extends ArrayAdapter<Result> {
 
     private List<Result> objects;
