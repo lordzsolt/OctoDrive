@@ -35,9 +35,7 @@ public class Result extends OctoObject {
     public Result(String objectId) {
         _parseObject = new ParseObject(WebserviceConstants.kPARSE_OBJECT_RESULT);
         ParseObject user = ParseObject.createWithoutData(WebserviceConstants.kPARSE_OBJECT_USER, objectId);
-        ParseRelation relation = _parseObject.getRelation(WebserviceConstants.kPARSE_PROPERY_RESULT_USER);
-        relation.add(user);
-        _parseObject.put(WebserviceConstants.kPARSE_PROPERY_RESULT_USER, relation);
+        _parseObject.put(WebserviceConstants.kPARSE_PROPERY_RESULT_USER, user);
     }
 
     public Result(ParseObject parseObject) {
