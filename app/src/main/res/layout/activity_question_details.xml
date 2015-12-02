@@ -87,7 +87,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="@string/question_edit_correct"/>
+                    android:text="@string/question_edit_correct"
+                    android:id="@+id/textView_correct"/>
 
                 <CheckBox
                     android:layout_width="wrap_content"

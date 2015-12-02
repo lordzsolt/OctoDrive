@@ -61,4 +61,5 @@
     <string name="error_first_question">Ez az első kérdés.</string>
     <string name="error_last_question">Ez az utolsó kérdés.</string>
     <string name="error_need_one">Ki kell választanod legalább egy választ.</string>
+    <string name="one_must_be_correct">Kötelező legalább egy helyes válasz</string>
 </resources>

@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dreamteam.octodrive.R;
@@ -204,14 +205,34 @@ public class QuestionDetailsActivity extends AppCompatActivity {
 
         EditText messageEdit = (EditText)findViewById(R.id.question_edit_message);
         String newMessage = messageEdit.getText().toString();
+        if (newMessage.isEmpty()) {
+            messageEdit.setError(getString(R.string.invalid_input));
+            messageEdit.requestFocus();
+            return;
+        }
         newQuestion.setMessage(newMessage);
 
         EditText answer1Edit = (EditText)findViewById(R.id.question_edit_answer1);
         String newAnswer1 = answer1Edit.getText().toString();
+        if (newAnswer1.isEmpty()) {
+            answer1Edit.setError(getString(R.string.invalid_input));
+            answer1Edit.requestFocus();
+            return;
+        }
         EditText answer2Edit = (EditText)findViewById(R.id.question_edit_answer2);
         String newAnswer2 = answer2Edit.getText().toString();
+        if (newAnswer2.isEmpty()) {
+            answer2Edit.setError(getString(R.string.invalid_input));
+            answer2Edit.requestFocus();
+            return;
+        }
         EditText answer3Edit = (EditText)findViewById(R.id.question_edit_answer3);
         String newAnswer3 = answer3Edit.getText().toString();
+        if (newAnswer3.isEmpty()) {
+            answer3Edit.setError(getString(R.string.invalid_input));
+            answer3Edit.requestFocus();
+            return;
+        }
         newQuestion.setAnswers(Arrays.asList(newAnswer1, newAnswer2, newAnswer3));
 
         CheckBox correct1Checkbox = (CheckBox)findViewById(R.id.checkBox_correct_answer1);
@@ -220,6 +241,12 @@ public class QuestionDetailsActivity extends AppCompatActivity {
         boolean correct2 = correct2Checkbox.isChecked();
         CheckBox correct3Checkbox = (CheckBox)findViewById(R.id.checkBox_correct_answer3);
         boolean correct3 = correct3Checkbox.isChecked();
+        if (!(correct1 || correct2 || correct3)) {
+            TextView correctTextView = (TextView)findViewById(R.id.textView_correct);
+            correctTextView.setError("");
+            Toast.makeText(this, R.string.one_must_be_correct, Toast.LENGTH_SHORT).show();
+            return;
+        }
         newQuestion.setCorrectAnswers(Arrays.asList(correct1, correct2, correct3));
 
         CheckBox checkBoxActive = (CheckBox)findViewById(R.id.activeCheckBox);
@@ -228,6 +255,12 @@ public class QuestionDetailsActivity extends AppCompatActivity {
 
         Spinner languageSpinner = (Spinner)findViewById(R.id.language_spinner);
         String language = languageSpinner.getSelectedItem().toString();
+        if (language.isEmpty()) {
+            TextView textView = (TextView)languageSpinner.getSelectedView();
+            textView.setError(getString(R.string.invalid_input));
+            textView.requestFocus();
+            return;
+        }
         newQuestion.setLanguage(language);
 
         mLoadingView = new LoadingView(this, getString(R.string.dialog_loading));

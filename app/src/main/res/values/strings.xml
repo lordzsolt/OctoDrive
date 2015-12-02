@@ -71,6 +71,7 @@
     <string name="question_edit_image">Image:</string>
     <string name="action_save">Save</string>
     <string name="dialog_uploading">Uploading…</string>
+    <string name="one_must_be_correct">At least one answer has to be set as correct</string>
 
     <!-- UserDetailsActivity -->
     <string name="user_details_name">Name:</string>
