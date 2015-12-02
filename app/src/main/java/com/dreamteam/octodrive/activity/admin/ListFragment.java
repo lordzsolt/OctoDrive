@@ -50,12 +50,6 @@ public class ListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_item_list, container, false);
-        if (_canAddNew) {
-            //TODO: Add FAB somehow....
-//            RecyclerView recyclerView = (RecyclerView)view;
-//            FloatingActionButton fab = (FloatingActionButton)view.findViewById(R.id.button_add_new);
-//            fab.setVisibility(View.GONE);
-        }
         return view;
     }
 

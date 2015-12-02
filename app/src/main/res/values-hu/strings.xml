@@ -57,4 +57,5 @@
     <string name="user_details_result_date"><b>Dátum</b></string>
     <string name="user_details_result_score"><b>Pontok</b></string>
     <string name="text_minimum_pass">Minimális átmenő kérdések száma</string>
+    <string name="action_new">Létrehozás</string>
 </resources>
