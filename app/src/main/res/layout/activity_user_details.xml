@@ -67,6 +67,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginEnd="10dp"
                     android:text="@string/user_details_admin"
+                    android:clickable="false"
                     android:id="@+id/checkbox_admin"/>
             </LinearLayout>
 

@@ -58,26 +58,26 @@ public class UserDetailsActivity extends AppCompatActivity {
         mGetResultsTask.execute();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_question_details, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_save:
-                updateUser();
-                break;
-
-            default:
-                break;
-        }
-
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        MenuInflater inflater = getMenuInflater();
+//        inflater.inflate(R.menu.menu_question_details, menu);
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()) {
+//            case R.id.action_save:
+//                updateUser();
+//                break;
+//
+//            default:
+//                break;
+//        }
+//
+//        return true;
+//    }
 
     void updateUser() {
         CheckBox checkBoxActive = (CheckBox)findViewById(R.id.checkbox_admin);
