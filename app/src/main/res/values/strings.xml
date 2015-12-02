@@ -45,6 +45,7 @@
     <string name="admin_page_title_users">USERS</string>
     <string name="admin_page_title_questions">QUESTIONS</string>
     <string name="admin_page_title_settings">SETTINGS</string>
+    <string name="action_new">New</string>
 
     <!-- SettingsFragment -->
     <string name="title_activity_question_details">Question Management</string>
